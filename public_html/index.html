@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script>
+		function draw(data) {
+			"use strict";
+			d3.select("body")
+				.append("div")
+					.attr("class", "chart")
+				.selectAll(".bar")
+				.data(data)
+				.enter()
+				.append("div")
+					.attr("class", "bar")
+					.style("width", function (d) { return d.count / 100 + "px" })
+					.style("outline", "1px solid black")
+					.text(function (d) {
+						return d.count > 20 ? d.hashtag : "";
+					});
+		}
+	</script>
+</head>
+<body>
+	<script>
+		d3.json("data/hashtags.json", draw);
+	</script>
+</body>
+</html>
