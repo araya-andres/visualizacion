@@ -31,8 +31,7 @@ div.label {
   font-family: sans-serif;
 }
 .tick {
-  fill: none;
-  stroke: gray;
+  font-size: 5pt;
 }
 circle {
   stroke: black;

@@ -36,7 +36,7 @@ function tweets_por_minuto(data) {
   var x_extent =
     d3.extent(data, function(d) { return d.timestamp });
   var x_scale =
-    d3.scale.linear()
+    d3.time.scale()
       .range([margin, width - margin])
       .domain(x_extent);
   var y_extent =
@@ -68,12 +68,12 @@ function tweets_por_minuto(data) {
 
   d3.select(".x.axis")
     .append("text")
-      .text("hora (epoch)")
+      .text("hora")
       .attr("x", (width / 2) - margin)
       .attr("y", margin / 1.5);
 
   d3.select(".y.axis")
     .append("text")
       .text("tweets")
-      .attr("transform", "rotate(-90, -30, 0) translate(-280)");
+      .attr("transform", "rotate(-90, -30, 0) translate(" + (200 - height) + ")");
 }
