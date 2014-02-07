@@ -8,8 +8,8 @@ def indice(t, t0, intervalo)
   (t - t0) / intervalo
 end
 
-def timestamp(i, t0, intervalo)
-  i * intervalo + t0
+def timestamp_en_ms(i, t0, intervalo)
+  (i * intervalo + t0) * 1000
 end
 
 file_name = ARGV[0]
@@ -23,7 +23,7 @@ hashtags = tweets["statuses"].inject(Array.new(n, 0)) { |ans, t|
   ans[i] += 1
   ans
 }.each_with_index.collect { |count, i|
-  { timestamp: timestamp(i, T0, intervalo), count: count }
+  { timestamp: timestamp_en_ms(i, T0, intervalo), count: count }
 }
 
 puts JSON.pretty_generate(hashtags)
