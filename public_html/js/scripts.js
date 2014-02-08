@@ -39,6 +39,7 @@ function tweets_por_minuto(data) {
     d3.time.scale()
       .range([margin, width - margin])
       .domain(x_extent);
+
   var y_extent =
     d3.extent(data, function(d) { return d.count });
   var y_scale =
@@ -76,4 +77,13 @@ function tweets_por_minuto(data) {
     .append("text")
       .text("tweets")
       .attr("transform", "rotate(-90, -30, 0) translate(" + (200 - height) + ")");
+
+  var line = d3.svg.line()
+    .x(function (d) { return x_scale(d.timestamp) })
+    .y(function (d) { return y_scale(d.count) });
+
+  d3.select("svg")
+    .append("path")
+      .attr("d", line(data))
+      .attr("class", "line");
 }

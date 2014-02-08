@@ -39,3 +39,7 @@ circle {
   fill: RoyalBlue;
   opacity: 0.6;
 }
+path.line {
+  stroke: LightBlue;
+  fill: None;
+}
