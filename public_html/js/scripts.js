@@ -76,7 +76,7 @@ function tweets_por_minuto(data) {
   d3.select(".y.axis")
     .append("text")
       .text("tweets")
-      .attr("transform", "rotate(-90, -30, 0) translate(" + (200 - height) + ")");
+      .attr("transform", "rotate(90, " + -margin + ", 0)");
 
   var line = d3.svg.line()
     .x(function (d) { return x_scale(d.timestamp) })
