@@ -22,7 +22,8 @@ function draw(data) {
 function tweets_por_minuto(data) {
   var margin = 50,
       width = 700,
-      height = 300;
+      height = 300,
+      radius = 2;
 
   d3.select("body")
     .append("svg")
@@ -51,7 +52,7 @@ function tweets_por_minuto(data) {
     .attr("cx", function(d) { return x_scale(d.timestamp) })
     .attr("cy", function(d) { return y_scale(d.count) });
   d3.selectAll("circle")
-    .attr("r", 2);
+    .attr("r", radius);
 
   var x_axis = d3.svg.axis().scale(x_scale);
   d3.select("svg")
@@ -86,4 +87,16 @@ function tweets_por_minuto(data) {
     .append("path")
       .attr("d", line(data))
       .attr("class", "line");
+
+  d3.selectAll("circle")
+    .on("mouseover", function(d) {
+      d3.select(this)
+        .transition()
+        .attr("r", 2 * radius);
+    })
+    .on("mouseout", function(d) {
+      d3.select(this)
+        .transition()
+        .attr("r", radius);
+    })
 }
