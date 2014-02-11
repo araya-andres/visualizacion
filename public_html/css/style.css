@@ -1,5 +1,16 @@
-div.chart {
+body
+{
+	background-color: black;
+	color: #aaaaaa;	
 	font-family: sans-serif;
+}
+
+a:link {color:#aaaaaa}      /* unvisited link */
+a:visited {color:#999999;}  /* visited link */
+a:hover {color:white;}  /* mouse over link */
+a:active {color:white;}  /* selected link */ 
+
+div.chart {
 	font-size: 0.7em;
 }
 div.bar {
@@ -13,6 +24,7 @@ div.bar {
 	margin-left: 22em;
 }
 div.label {
+	color: white;
 	height: 2em;
 	line-height: 2em;
 	padding-right: 1em;
@@ -24,7 +36,7 @@ div.label {
 
 .axis path {
   fill: none;
-  stroke: black;
+  stroke: white;
 }
 .axis {
   font-size: 6pt;
@@ -34,12 +46,19 @@ div.label {
   font-size: 5pt;
 }
 circle {
-  stroke: black;
+  stroke: white;
   stroke-width: 0.5px;
-  fill: RoyalBlue;
+  fill: LightBlue;
   opacity: 0.6;
 }
 path.line {
-  stroke: LightBlue;
+  stroke: DarkRed;
   fill: None;
+}
+
+text {
+  stroke: white;
+  stroke-width: 0.5px;
+  fill: white;
+  opacity: 0.6;
 }
