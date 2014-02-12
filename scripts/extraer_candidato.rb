@@ -1,10 +1,9 @@
 require 'json'
 
-file_name = ARGV[0]
-s = IO.read(file_name)
-tweets = JSON.parse(s)
-
-keywords=%w(john araya pln liberacion cambio responsable tiempo construir yoni jhon)
+def read_tweets(file_name)
+  s = IO.read(file_name)
+  JSON.parse(s)
+end
 
 def match?(hashtags, re)
   hashtags.each do |h|
@@ -13,7 +12,9 @@ def match?(hashtags, re)
   return false
 end
 
-re = keywords.map { |k| Regexp.new(k) }
+tweets = read_tweets(ARGV[0])
+keywords = IO.readlines(ARGV[1])
+re = keywords.map { |k| Regexp.new(k.chomp) }
 statuses = tweets["statuses"].inject([]) { |ans, t|
   ans << t if match?(t["new_hashtags"], re)
   ans
