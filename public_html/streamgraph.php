@@ -2,13 +2,13 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="/css/streamgraph.css" type="text/css">
 <body>
-<script src="/d3.v3/d3.v3.js"></script>
+	<script src="js/d3/d3.min.js"></script>
 <div class="chart">
 </div>
 
 <script>
 
-chart("/data/data.csv", "blue");
+chart("data/data.csv", "blue");
 
 var datearray = [];
 var colorrange = [];
