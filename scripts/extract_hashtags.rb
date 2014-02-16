@@ -1,9 +1,6 @@
-require 'json'
+load File.expand_path('common.rb', File.dirname(__FILE__))
 
-file_name = ARGV[0]
-s = IO.read(file_name)
-tweets = JSON.parse(s)
-
+tweets = read_tweets(ARGV[0])
 hashtags = tweets["statuses"].inject({}) { |ans, t|
   t["new_hashtags"].each { |h| ans[h] = 1 + (ans[h] || 0) }
   ans

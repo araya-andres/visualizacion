@@ -1,9 +1,4 @@
-require 'json'
-
-def read_tweets(file_name)
-  s = IO.read(file_name)
-  JSON.parse(s)
-end
+load File.expand_path('common.rb', File.dirname(__FILE__))
 
 def read_keywords(file_name)
   IO.readlines(file_name).map { |k| Regexp.new(k.chomp) }
