@@ -14,7 +14,7 @@ end
 tweets = read_tweets(ARGV[0])
 keywords = read_keywords(ARGV[1])
 statuses = tweets["statuses"].inject([]) { |ans, t|
-  ans << t if match?(t["new_hashtags"], keywords)
+  ans << t if match?(t["new_hashtags"], keywords) || match?(t["user_mentions"], keywords)
   ans
 }
 tweets["statuses"] = statuses
