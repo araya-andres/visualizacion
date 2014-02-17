@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="/css/streamgraph.css" type="text/css">
+<link rel="stylesheet" href="css/streamgraph.css" type="text/css">
 <body>
 	<script src="js/d3/d3.min.js"></script>
 <div class="chart">
@@ -26,8 +26,6 @@ else if (color == "orange") {
   colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
 }
 strokecolor = colorrange[0];
-
-var format = d3.time.format("%m/%d/%y");
 
 var margin = {top: 20, right: 40, bottom: 30, left: 30};
 var width = document.body.clientWidth - margin.left - margin.right;
@@ -85,7 +83,6 @@ var svg = d3.select(".chart").append("svg")
 
 var graph = d3.csv(csvpath, function(data) {
   data.forEach(function(d) {
-    d.date = format.parse(d.date);
     d.value = +d.value;
   });
 
