@@ -8,23 +8,22 @@
 
 <script>
 
-chart("data/data.csv", "blue");
+chart("data/data.csv");
 
 var datearray = [];
 var colorrange = [];
 
 
-function chart(csvpath, color) {
+function chart(csvpath) {
 
-if (color == "blue") {
-  colorrange = ["#045A8D", "#2B8CBE", "#74A9CF", "#A6BDDB", "#D0D1E6", "#F1EEF6"];
-}
-else if (color == "pink") {
-  colorrange = ["#980043", "#DD1C77", "#DF65B0", "#C994C7", "#D4B9DA", "#F1EEF6"];
-}
-else if (color == "orange") {
-  colorrange = ["#B30000", "#E34A33", "#FC8D59", "#FDBB84", "#FDD49E", "#FEF0D9"];
-}
+colorrange = [
+  "#169c38", /* pln */
+  "#ffffff", /* ml */
+  "#0000ec", /* pusc */
+  "#db1d27", /* pac */
+  "#fff200"  /* fa */
+];
+
 strokecolor = colorrange[0];
 
 var margin = {top: 20, right: 40, bottom: 30, left: 30};
