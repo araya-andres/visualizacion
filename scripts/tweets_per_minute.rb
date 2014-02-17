@@ -8,7 +8,5 @@ tweets_per_minute = tweets["statuses"].inject(Array.new(n, 0)) { |tpm, t|
   tpm[i] += 1
   tpm
 }.each_with_index { |count, i|
-  { timestamp: timestamp_in_ms(i, T0, interval), count: count }
+  puts "#{timestamp_in_ms(i, T0, interval)}#{CSV_SEPARATOR}#{count}"
 }
-
-puts JSON.pretty_generate(tweets_per_minute)
