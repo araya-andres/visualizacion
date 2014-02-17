@@ -48,7 +48,7 @@ propuestasfa
 frenteamplio
 merinillo
 jmv
-fa
+^fa$
 voyconelfa
 villaltinflas
 hayesperanza
