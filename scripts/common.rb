@@ -3,7 +3,6 @@ require 'json'
 T0 = 1390176000 #  6:00 PM
 T1 = 1390197600 # 12:00 AM
 ONE_MINUTE = 60
-CSV_SEPARATOR = ','
 
 def read_tweets(file_name)
   s = IO.read(file_name)
