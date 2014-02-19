@@ -11,7 +11,7 @@ function chart(csvpath) {
     "#0000ec", /* pusc */
     "#db1d27", /* pac */
     "#fff200"  /* fa */
-      ];
+  ];
 
   strokecolor = colorrange[0];
 
@@ -58,7 +58,7 @@ function chart(csvpath) {
 
   var area = d3.svg.area()
     .interpolate("cardinal")
-    .x(function(d) { return x(d.date); })
+    .x (function(d) { return x(d.date); })
     .y0(function(d) { return y(d.y0); })
     .y1(function(d) { return y(d.y0 + d.y); });
 
@@ -113,7 +113,7 @@ function chart(csvpath) {
     mousex = d3.mouse(this);
     mousex = mousex[0]; // coordenada x
     var i = Math.floor((x.invert(mousex).getTime() - t0) / interval);
-    var t = (i * interval + t0) / 1000;
+    var t = (new Date(i * interval + t0)).toLocaleTimeString();
     var value = d.values[i].value;
 
     d3.select(this)
