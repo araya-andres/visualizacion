@@ -123,21 +123,21 @@ var graph = d3.csv(csvpath, function(data) {
       mousex = d3.mouse(this);
       mousex = mousex[0];
       var invertedx = x.invert(mousex);
-      invertedx = invertedx.getMonth() + invertedx.getDate();
+      //invertedx = invertedx.getMonth() + invertedx.getDate();
       var selected = (d.values);
       for (var k = 0; k < selected.length; k++) {
         datearray[k] = selected[k].date
-        datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
+        //datearray[k] = datearray[k].getMonth() + datearray[k].getDate();
       }
 
       mousedate = datearray.indexOf(invertedx);
-      pro = d.values[mousedate].value;
+      //pro = d.values[mousedate].value;
 
       d3.select(this)
       .classed("hover", true)
       .attr("stroke", strokecolor)
       .attr("stroke-width", "0.5px"), 
-      tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "visible");
+      tooltip.html( "<p>" + d.key + "</p>" ).style("visibility", "visible");
       
     })
     .on("mouseout", function(d, i) {
@@ -147,7 +147,7 @@ var graph = d3.csv(csvpath, function(data) {
       .attr("opacity", "1");
       d3.select(this)
       .classed("hover", false)
-      .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "<br>" + pro + "</p>" ).style("visibility", "hidden");
+      .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "</p>" ).style("visibility", "hidden");
   })
     
   var vertical = d3.select(".chart")
