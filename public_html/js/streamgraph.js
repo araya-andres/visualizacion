@@ -111,16 +111,16 @@ function chart(csvpath) {
 
   .on("mousemove", function(d, i) {
     mousex = d3.mouse(this);
-    mousex = mousex[0]; // coordenada x
-    var i = Math.floor((x.invert(mousex).getTime() - t0) / interval);
-    var t = (new Date(i * interval + t0)).toLocaleTimeString();
-    var value = d.values[i].value;
+    var i = Math.floor((x.invert(mousex[0]).getTime() - t0) / interval);
+    var msg = d.key + "<br/>" +
+      d.values[i].value + "<br/>" +
+      (new Date(i * interval + t0)).toLocaleTimeString();
 
     d3.select(this)
     .classed("hover", true)
     .attr("stroke", strokecolor)
     .attr("stroke-width", "0.5px"), 
-    tooltip.html( "<p>" + d.key + "<br/>" + value + "<br/>" + t + "</p>" ).style("visibility", "visible");
+    tooltip.html(msg).style("visibility", "visible");
 
   })
   .on("mouseout", function(d, i) {
@@ -130,7 +130,7 @@ function chart(csvpath) {
     .attr("opacity", "1");
   d3.select(this)
     .classed("hover", false)
-    .attr("stroke-width", "0px"), tooltip.html( "<p>" + d.key + "</p>" ).style("visibility", "hidden");
+    .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
   })
 
   var vertical = d3.select(".chart")
