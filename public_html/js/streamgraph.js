@@ -132,6 +132,9 @@ function chart(csvpath) {
     .classed("hover", false)
     .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
   })
+  .on("click", function(d) {
+    console.log("you click over " + d.key);
+  })
 
   var vertical = d3.select(".chart")
     .append("div")
