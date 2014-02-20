@@ -21,7 +21,7 @@ function chart(csvpath) {
 
   var tooltip = d3.select("body")
     .append("div")
-    .attr("class", "remove")
+    .attr("class", "tooltip")
     .style("position", "absolute")
     .style("z-index", "20")
     .style("visibility", "hidden")

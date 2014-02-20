@@ -7,3 +7,9 @@ body {
   stroke: black;
   stroke-width: 1px;
 }
+
+.tooltip {
+  padding: 10px;
+  color: white;
+  background: gray;
+}
