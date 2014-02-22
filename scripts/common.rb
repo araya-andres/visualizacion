@@ -19,5 +19,5 @@ def timestamp_in_ms(i, t0, interval)
 end
 
 def print_header
-  puts %w(date key value).to_csv
+  puts %w(key date value).to_csv
 end
