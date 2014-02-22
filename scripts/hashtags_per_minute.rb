@@ -2,7 +2,9 @@ load File.expand_path('common.rb', File.dirname(__FILE__))
 
 tweets = read_tweets(ARGV[0])
 interval = ONE_MINUTE
+threshold = 5
 n = index(T1, T0, interval)
+
 print_header
 tweets["statuses"].inject({}) { |hash, tweet|
   i = index(tweet["created_at"], T0, interval)
@@ -11,6 +13,8 @@ tweets["statuses"].inject({}) { |hash, tweet|
     arr[i] += 1
   }
   hash
+}.select { |hash, arr|
+  arr.inject(0) { |sum, count| sum += count } > threshold
 }.sort_by { |hash, arr|
   arr.inject(0) { |sum, count| sum -= count }
 }.each { |hashtag, arr|
