@@ -1,3 +1,4 @@
+require 'csv'
 require 'json'
 
 T0 = 1390176000 #  6:00 PM
@@ -15,4 +16,8 @@ end
 
 def timestamp_in_ms(i, t0, interval)
   (i * interval + t0) * 1000
+end
+
+def print_header
+  puts %w(date key value).to_csv
 end
