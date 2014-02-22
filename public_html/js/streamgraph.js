@@ -85,7 +85,6 @@ function chart(csvpath) {
     .attr("d", function(d) { return area(d.values); })
     .style("fill", function(d, i) { return z(i); });
 
-
   svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
@@ -97,7 +96,7 @@ function chart(csvpath) {
       svg.selectAll(".layer").transition()
       .duration(250)
       .attr("opacity", function(d, j) {
-        return j != i ? 0.6 : 1;
+        return j != i ? 0.3 : 1;
       })})
 
   .on("mousemove", function(d, i) {
