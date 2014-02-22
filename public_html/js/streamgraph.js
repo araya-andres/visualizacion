@@ -19,6 +19,7 @@ function chart(csvpath) {
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 400 - margin.top - margin.bottom;
 
+  // Show tooltip
   var tooltip = d3.select("body")
     .append("div")
     .attr("class", "tooltip")
@@ -99,8 +100,8 @@ function chart(csvpath) {
         return j != i ? 0.3 : 1;
       })})
     .on("mousemove", function(d, i) {
-      mousex = d3.mouse(this);
-      var i = Math.floor((x.invert(mousex[0]).getTime() - t0) / interval);
+      coord = d3.mouse(this);
+      var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
       var msg = d.key + "<br/>" +
         d.values[i].value + "<br/>" +
         (new Date(i * interval + t0)).toLocaleTimeString();
@@ -109,8 +110,12 @@ function chart(csvpath) {
         .classed("hover", true)
         .attr("stroke", strokecolor)
         .attr("stroke-width", "0.5px"), 
-      tooltip.html(msg).style("visibility", "visible");
 
+      tooltip
+        .html(msg)
+        .style("visibility", "visible")
+        .style("left", coord[0] + "px")
+        .style("top", coord[1] + "px");
     })
     .on("mouseout", function(d, i) {
       svg.selectAll(".layer")
@@ -125,6 +130,7 @@ function chart(csvpath) {
       console.log("you click over " + d.key);
     })
 
+  // Vertical bar
   var vertical = d3.select(".chart")
     .append("div")
     .attr("class", "remove")
@@ -135,16 +141,14 @@ function chart(csvpath) {
     .style("top", "10px")
     .style("bottom", "30px")
     .style("left", "0px")
-    .style("background", "#fff");
+    .style("background", "gray");
 
   d3.select(".chart")
     .on("mousemove", function(){  
-      mousex = d3.mouse(this);
-      mousex = mousex[0] + 5;
-      vertical.style("left", mousex + "px" )})
+      px = d3.mouse(this)[0] + 5;
+      vertical.style("left", px + "px" )})
     .on("mouseover", function(){  
-      mousex = d3.mouse(this);
-      mousex = mousex[0] + 5;
-      vertical.style("left", mousex + "px")});
+      px = d3.mouse(this)[0] + 5;
+      vertical.style("left", px + "px")});
   });
 }
