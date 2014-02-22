@@ -1,23 +1,19 @@
 var t0 = 1390176000000;
 var interval = 60000; // one minute
 var datearray = [];
-var colorrange = [];
 
-function chart(csvpath) {
-
-  colorrange = [
-    "#169c38", /* pln */
-    "#ffffff", /* ml */
-    "#0000ec", /* pusc */
-    "#db1d27", /* pac */
-    "#fff200"  /* fa */
-  ];
-
-  strokecolor = colorrange[0];
-
+function chart(csvpath, options) {
+  var options = options || {};
+  var layers = options.layers || 5;
+  var initial_color = options.initial_color || 0xaad0;
+  var step = Math.floor(initial_color / layers);
+  var colorrange = options.colorrange ||
+    Array.apply(null, Array(layers)).map(function(_, i) {
+      return initial_color - step * i;
+    });
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
   var width = document.body.clientWidth - margin.left - margin.right;
-  var height = 400 - margin.top - margin.bottom;
+  var height = 600 - margin.top - margin.bottom;
 
   // Show tooltip
   var tooltip = d3.select("body")
@@ -105,8 +101,7 @@ function chart(csvpath) {
 
         d3.select(this)
           .classed("hover", true)
-          .attr("stroke", strokecolor)
-          .attr("stroke-width", "0.5px"), 
+          .attr("stroke", colorrange[i]);
 
         tooltip.html(msg)
           .style("visibility", "visible")
@@ -132,9 +127,9 @@ function chart(csvpath) {
         .attr("class", "vertical")
         .style("position", "absolute")
         .style("width", "1px")
-        .style("height", "380px")
-        .style("top", "10px")
-        .style("bottom", "30px")
+        .style("height", height + "px")
+        .style("top", margin.top + "px")
+        .style("bottom", margin.bottom + "px")
         .style("background", "gray");
 
       d3.select(".chart")
