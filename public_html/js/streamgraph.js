@@ -77,70 +77,69 @@ function chart(csvpath) {
     y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
 
     svg.selectAll(".layer")
-    .data(layers)
-    .enter().append("path")
-    .attr("class", "layer")
-    .attr("d", function(d) { return area(d.values); })
-    .style("fill", function(d, i) { return z(i); });
+      .data(layers)
+      .enter().append("path")
+      .attr("class", "layer")
+      .attr("d", function(d) { return area(d.values); })
+      .style("fill", function(d, i) { return z(i); });
 
-  svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
 
-  svg.selectAll(".layer")
-    .attr("opacity", 1)
-    .on("mouseover", function(d, i) {
-      svg.selectAll(".layer").transition()
-      .duration(250)
-      .attr("opacity", function(d, j) {
-        return j != i ? 0.3 : 1;
-      })})
-    .on("mousemove", function(d, i) {
-      coord = d3.mouse(this);
-      var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
-      var msg = d.key + "<br/>" +
-        d.values[i].value + "<br/>" +
-        (new Date(i * interval + t0)).toLocaleTimeString();
+    svg.selectAll(".layer")
+      .attr("opacity", 1)
+      .on("mouseover", function(d, i) {
+        svg.selectAll(".layer").transition()
+          .duration(250)
+          .attr("opacity", function(d, j) {
+            return j != i ? 0.3 : 1;
+          })})
+      .on("mousemove", function(d, i) {
+        coord = d3.mouse(this);
+        var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
+        var msg = d.key + "<br/>" +
+          d.values[i].value + "<br/>" +
+          (new Date(i * interval + t0)).toLocaleTimeString();
 
-      d3.select(this)
-        .classed("hover", true)
-        .attr("stroke", strokecolor)
-        .attr("stroke-width", "0.5px"), 
+        d3.select(this)
+          .classed("hover", true)
+          .attr("stroke", strokecolor)
+          .attr("stroke-width", "0.5px"), 
 
-      tooltip
-        .html(msg)
-        .style("visibility", "visible")
-        .style("left", coord[0] + "px")
-        .style("top", coord[1] + "px");
-    })
-    .on("mouseout", function(d, i) {
-      svg.selectAll(".layer")
-        .transition()
-        .duration(250)
-        .attr("opacity", "1");
-      d3.select(this)
-        .classed("hover", false)
-        .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
-    })
-    .on("click", function(d) {
-      console.log("you click over " + d.key);
-    })
+        tooltip.html(msg)
+          .style("visibility", "visible")
+          .style("left", coord[0] + "px")
+          .style("top", coord[1] + "px");
+      })
+      .on("mouseout", function(d, i) {
+        svg.selectAll(".layer")
+          .transition()
+          .duration(250)
+          .attr("opacity", "1");
+        d3.select(this)
+          .classed("hover", false)
+          .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
+      })
+      .on("click", function(d) {
+        console.log("you click over " + d.key);
+      })
 
-    // Vertical bar
-    var vertical = d3.select(".chart")
-      .append("div")
-      .attr("class", "vertical")
-      .style("position", "absolute")
-      .style("width", "1px")
-      .style("height", "380px")
-      .style("top", "10px")
-      .style("bottom", "30px")
-      .style("background", "gray");
+      // Vertical bar
+      var vertical = d3.select(".chart")
+        .append("div")
+        .attr("class", "vertical")
+        .style("position", "absolute")
+        .style("width", "1px")
+        .style("height", "380px")
+        .style("top", "10px")
+        .style("bottom", "30px")
+        .style("background", "gray");
 
-    d3.select(".chart")
-      .on("mousemove", function() {
-        px = d3.mouse(this)[0] + 5;
-        vertical.style("left", px + "px" )});
+      d3.select(".chart")
+        .on("mousemove", function() {
+          px = d3.mouse(this)[0] + 5;
+          vertical.style("left", px + "px" )});
   });
 }
