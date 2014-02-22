@@ -24,10 +24,7 @@ function chart(csvpath) {
     .append("div")
     .attr("class", "tooltip")
     .style("position", "absolute")
-    .style("z-index", "20")
-    .style("visibility", "hidden")
-    .style("top", "30px")
-    .style("left", "55px");
+    .style("visibility", "hidden");
 
   var x = d3.time.scale()
     .range([0, width]);
@@ -130,25 +127,20 @@ function chart(csvpath) {
       console.log("you click over " + d.key);
     })
 
-  // Vertical bar
-  var vertical = d3.select(".chart")
-    .append("div")
-    .attr("class", "remove")
-    .style("position", "absolute")
-    .style("z-index", "19")
-    .style("width", "1px")
-    .style("height", "380px")
-    .style("top", "10px")
-    .style("bottom", "30px")
-    .style("left", "0px")
-    .style("background", "gray");
+    // Vertical bar
+    var vertical = d3.select(".chart")
+      .append("div")
+      .attr("class", "vertical")
+      .style("position", "absolute")
+      .style("width", "1px")
+      .style("height", "380px")
+      .style("top", "10px")
+      .style("bottom", "30px")
+      .style("background", "gray");
 
-  d3.select(".chart")
-    .on("mousemove", function(){  
-      px = d3.mouse(this)[0] + 5;
-      vertical.style("left", px + "px" )})
-    .on("mouseover", function(){  
-      px = d3.mouse(this)[0] + 5;
-      vertical.style("left", px + "px")});
+    d3.select(".chart")
+      .on("mousemove", function() {
+        px = d3.mouse(this)[0] + 5;
+        vertical.style("left", px + "px" )});
   });
 }
