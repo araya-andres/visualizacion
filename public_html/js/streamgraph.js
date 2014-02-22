@@ -98,33 +98,32 @@ function chart(csvpath) {
       .attr("opacity", function(d, j) {
         return j != i ? 0.3 : 1;
       })})
+    .on("mousemove", function(d, i) {
+      mousex = d3.mouse(this);
+      var i = Math.floor((x.invert(mousex[0]).getTime() - t0) / interval);
+      var msg = d.key + "<br/>" +
+        d.values[i].value + "<br/>" +
+        (new Date(i * interval + t0)).toLocaleTimeString();
 
-  .on("mousemove", function(d, i) {
-    mousex = d3.mouse(this);
-    var i = Math.floor((x.invert(mousex[0]).getTime() - t0) / interval);
-    var msg = d.key + "<br/>" +
-      d.values[i].value + "<br/>" +
-      (new Date(i * interval + t0)).toLocaleTimeString();
+      d3.select(this)
+        .classed("hover", true)
+        .attr("stroke", strokecolor)
+        .attr("stroke-width", "0.5px"), 
+      tooltip.html(msg).style("visibility", "visible");
 
-    d3.select(this)
-    .classed("hover", true)
-    .attr("stroke", strokecolor)
-    .attr("stroke-width", "0.5px"), 
-    tooltip.html(msg).style("visibility", "visible");
-
-  })
-  .on("mouseout", function(d, i) {
-    svg.selectAll(".layer")
-    .transition()
-    .duration(250)
-    .attr("opacity", "1");
-  d3.select(this)
-    .classed("hover", false)
-    .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
-  })
-  .on("click", function(d) {
-    console.log("you click over " + d.key);
-  })
+    })
+    .on("mouseout", function(d, i) {
+      svg.selectAll(".layer")
+        .transition()
+        .duration(250)
+        .attr("opacity", "1");
+      d3.select(this)
+        .classed("hover", false)
+        .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
+    })
+    .on("click", function(d) {
+      console.log("you click over " + d.key);
+    })
 
   var vertical = d3.select(".chart")
     .append("div")
