@@ -11,7 +11,6 @@ function chart(csvpath, options) {
     Array.apply(null, Array(layers)).map(function(_, i) {
       return "#" + (initial_color + step * i).toString(16);
     });
-  console.log(color_range);
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
