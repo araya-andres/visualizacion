@@ -1,5 +1,4 @@
 var t0 = 1390176000000;
-var datearray = [];
 
 function chart(csvpath, options) {
   var options = options || {};
@@ -11,6 +10,7 @@ function chart(csvpath, options) {
     Array.apply(null, Array(layers)).map(function(_, i) {
       return "#" + (initial_color + step * i).toString(16);
     });
+  var redirect = options.redirect || false;
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
@@ -120,7 +120,7 @@ function chart(csvpath, options) {
           .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
       })
       .on("click", function(d) {
-        console.log("you click over " + d.key);
+        if (redirect) window.location = d.key + ".html";
       })
 
       // Vertical bar
