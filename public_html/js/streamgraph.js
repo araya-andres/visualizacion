@@ -25,7 +25,7 @@ function chart(csvpath, options) {
   var x = d3.time.scale()
     .range([0, width]);
 
-  var y = d3.scale.sqrt()
+  var y = d3.scale.linear()
     .range([height-10, 0]);
 
   var z = d3.scale.ordinal()
