@@ -25,7 +25,7 @@ function chart(csvpath, options) {
   var x = d3.time.scale()
     .range([0, width]);
 
-  var y = d3.scale.linear()
+  var y = d3.scale.sqrt()
     .range([height-10, 0]);
 
   var z = d3.scale.ordinal()
@@ -42,7 +42,7 @@ function chart(csvpath, options) {
     .scale(y);
 
   var stack = d3.layout.stack()
-    .offset("silhouette")
+    .offset("wiggle")
     .values(function(d) { return d.values; })
     .x(function(d) { return d.date; })
     .y(function(d) { return d.value; });
