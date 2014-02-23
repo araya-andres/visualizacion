@@ -1,7 +1,8 @@
 load File.expand_path('common.rb', File.dirname(__FILE__))
 
 tweets = read_tweets(ARGV[0])
-interval = ONE_MINUTE
+k = ARGV[1] ? ARGV[1].to_i : 1
+interval = k * ONE_MINUTE
 threshold = 5
 n = index(T1, T0, interval)
 

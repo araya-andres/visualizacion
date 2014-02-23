@@ -1,7 +1,8 @@
 load File.expand_path('common.rb', File.dirname(__FILE__))
 
 tweets = read_tweets(ARGV[0])
-interval = ONE_MINUTE
+k = ARGV[1] ? ARGV[1].to_i : 1
+interval = k * ONE_MINUTE
 n = index(T1, T0, interval)
 tweets["statuses"].inject(Array.new(n, 0)) { |tweets_per_minute, tweet|
   i = index(tweet["created_at"], T0, interval)
