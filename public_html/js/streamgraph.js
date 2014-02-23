@@ -1,19 +1,22 @@
 var t0 = 1390176000000;
-var interval = 60000; // one minute
 var datearray = [];
 
 function chart(csvpath, options) {
   var options = options || {};
+  var interval = options.interval || 1;
   var layers = options.layers || 5;
-  var initial_color = options.initial_color || 0xaad0;
-  var step = Math.floor(initial_color / layers);
-  var colorrange = options.colorrange ||
+  var initial_color = options.initial_color || 0xaad;
+  var step = options.step || Math.floor(initial_color / layers);
+  var color_range = options.color_range ||
     Array.apply(null, Array(layers)).map(function(_, i) {
-      return initial_color - step * i;
+      return "#" + (initial_color + step * i).toString(16);
     });
+  console.log(color_range);
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
+
+  interval = interval * 60000;
 
   // Show tooltip
   var tooltip = d3.select("body")
@@ -29,7 +32,7 @@ function chart(csvpath, options) {
     .range([height-10, 0]);
 
   var z = d3.scale.ordinal()
-    .range(colorrange);
+    .range(color_range);
 
   var xAxis = d3.svg.axis()
     .scale(x)
@@ -101,7 +104,7 @@ function chart(csvpath, options) {
 
         d3.select(this)
           .classed("hover", true)
-          .attr("stroke", colorrange[i]);
+          .attr("stroke", color_range[i]);
 
         tooltip.html(msg)
           .style("visibility", "visible")
