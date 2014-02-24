@@ -1,64 +1,34 @@
-body
-{
-	background-color: black;
-	color: #aaaaaa;	
-	font-family: sans-serif;
+body {
+  font: 12px sans-serif;
+  background-color: #cccccc;
 }
 
-a:link {color:#aaaaaa}      /* unvisited link */
-a:visited {color:#999999;}  /* visited link */
-a:hover {color:white;}  /* mouse over link */
-a:active {color:white;}  /* selected link */ 
-
-div.chart {
-	font-size: 0.7em;
-}
-div.bar {
-	background-color: DarkRed;
-	color: white;
-	height: 2em;
-	line-height: 2em;
-	padding-right: 1em;
-	margin-bottom: 2px;
-	text-align: right;
-	margin-left: 22em;
-}
-div.label {
-	color: white;
-	height: 2em;
-	line-height: 2em;
-	padding-right: 1em;
-	margin-bottom: 2px;
-	float: left;
-	width: 20em;
-	text-align: right;
+h1 {
+  text-align: center;
 }
 
-.axis path {
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+.axis path, .axis line {
   fill: none;
-  stroke: white;
-}
-.axis {
-  font-size: 6pt;
-  font-family: sans-serif;
-}
-.tick {
-  font-size: 5pt;
-}
-circle {
-  stroke: white;
-  stroke-width: 0.5px;
-  fill: LightBlue;
-  opacity: 0.6;
-}
-path.line {
-  stroke: DarkRed;
-  fill: None;
+  stroke: black;
+  stroke-width: 1px;
 }
 
-text {
-  stroke: white;
-  stroke-width: 0.5px;
-  fill: white;
-  opacity: 0.6;
+.tooltip {
+  padding: 5px;
+  color: white;
+  background: gray;
+  border-radius:5px;
+}
+
+.guide
+{
+  vertical-align: middle;
 }
