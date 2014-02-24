@@ -86,6 +86,15 @@ function chart(csvpath, options) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
+    svg.append("line")
+      .attr("id","vertical_line")
+      .attr("x1","0")
+      .attr("y1","0")
+      .attr("x2","0")
+      .attr("y2",height)
+      .style("stroke","rgb(64,64,64)")
+      .style("stroke-width:1");
+
     svg.selectAll(".layer")
       .attr("opacity", 1)
       .on("mouseover", function(d, i) {
@@ -123,6 +132,7 @@ function chart(csvpath, options) {
         if (redirect) window.location = d.key + ".html";
       })
 
+/*
       // Vertical bar
       var vertical = d3.select(".chart")
         .append("div")
@@ -133,19 +143,14 @@ function chart(csvpath, options) {
         .style("top", margin.top + "px")
         .style("bottom", margin.bottom + "px")
         .style("background", "gray");
-
-      /* svg.append("line")
-        .attr("x1","0")
-	.attr("y1","0")
-	.attr("x2","0")
-	.attr("y2",height)
-	.style("stroke","rgb(64,64,64)")
-	.style("stroke-width:1");
-      */
+*/
       d3.select(".chart")
         .on("mousemove", function() {
-          px = d3.mouse(this)[0] + 5;
-          vertical.style("left", px + "px" );
+          px = d3.mouse(this)[0] - margin.left;
+          /*px = d3.mouse(this)[0] + 5;
+          vertical.style("left", px + "px" );*/
+	  document.getElementById("vertical_line").setAttribute("x1",px);
+	  document.getElementById("vertical_line").setAttribute("x2",px);
 	  });
   });
 }
