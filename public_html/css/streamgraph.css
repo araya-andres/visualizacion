@@ -1,5 +1,18 @@
 body {
   font: 12px sans-serif;
+  background-color: #cccccc;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
 }
 
 .axis path, .axis line {
@@ -13,4 +26,9 @@ body {
   color: white;
   background: gray;
   border-radius:5px;
+}
+
+.guide
+{
+  vertical-align: middle;
 }

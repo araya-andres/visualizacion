@@ -134,9 +134,18 @@ function chart(csvpath, options) {
         .style("bottom", margin.bottom + "px")
         .style("background", "gray");
 
+      /* svg.append("line")
+        .attr("x1","0")
+	.attr("y1","0")
+	.attr("x2","0")
+	.attr("y2",height)
+	.style("stroke","rgb(64,64,64)")
+	.style("stroke-width:1");
+      */
       d3.select(".chart")
         .on("mousemove", function() {
           px = d3.mouse(this)[0] + 5;
-          vertical.style("left", px + "px" )});
+          vertical.style("left", px + "px" );
+	  });
   });
 }
