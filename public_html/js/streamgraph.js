@@ -11,6 +11,7 @@ function chart(csvpath, options) {
       return "#" + (initial_color + step * i).toString(16);
     });
   var redirect = options.redirect || false;
+  var offset = options.offset || 0; // hack *temporal* para arreglar la posicion del tooltip
   var margin = {top: 20, right: 40, bottom: 30, left: 30};
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
@@ -108,7 +109,7 @@ function chart(csvpath, options) {
         tooltip.html(msg)
           .style("visibility", "visible")
           .style("left", coord[0] + "px")
-          .style("top", coord[1] + "px");
+          .style("top", (coord[1] + offset) + "px");
       })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
