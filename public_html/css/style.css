@@ -1,30 +1,39 @@
 body {
   font: 12px sans-serif;
-  background-color: #cccccc;
+  color: #ffffff;
+  background-color: #1f1f1f;
 }
 
 h1 {
   text-align: center;
+  color: #1671ac;
 }
 
 h2 {
   text-align: center;
+  color: #d78a29;
 }
 
-h3 {
-  text-align: center;
+/*
+hashtag {
+  color: #799a33;
 }
+
+user_mention {
+  color: #7470c8;
+}
+*/
 
 .axis path, .axis line {
   fill: none;
-  stroke: black;
+  stroke: white;
   stroke-width: 1px;
 }
 
 .tooltip {
   padding: 5px;
   color: white;
-  background: gray;
+  background: #1f1f1f;
   border-radius:5px;
 }
 
