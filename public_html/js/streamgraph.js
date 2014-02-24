@@ -112,12 +112,12 @@ function chart(csvpath, options) {
 
         d3.select(this)
           .classed("hover", true)
-          .attr("stroke", color_range[i]);
+          .attr("stroke", "gray");
 
         tooltip.html(msg)
           .style("visibility", "visible")
           .style("left", coord[0] + "px")
-          .style("top", margin.top + "px");
+          .style("top", coord[1] + "px");
       })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
@@ -132,8 +132,8 @@ function chart(csvpath, options) {
         if (redirect) window.location = d.key + ".html";
       })
 
-/*
       // Vertical bar
+      /*
       var vertical = d3.select(".chart")
         .append("div")
         .attr("class", "vertical")
@@ -143,14 +143,11 @@ function chart(csvpath, options) {
         .style("top", margin.top + "px")
         .style("bottom", margin.bottom + "px")
         .style("background", "gray");
-*/
+
       d3.select(".chart")
         .on("mousemove", function() {
-          px = d3.mouse(this)[0] - margin.left;
-          /*px = d3.mouse(this)[0] + 5;
-          vertical.style("left", px + "px" );*/
-	  document.getElementById("vertical_line").setAttribute("x1",px);
-	  document.getElementById("vertical_line").setAttribute("x2",px);
-	  });
+          px = d3.mouse(this)[0] + 5;
+          vertical.style("left", px + "px" );
+	  });*/
   });
 }
