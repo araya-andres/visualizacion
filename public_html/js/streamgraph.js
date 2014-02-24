@@ -86,15 +86,6 @@ function chart(csvpath, options) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
-    svg.append("line")
-      .attr("id","vertical_line")
-      .attr("x1","0")
-      .attr("y1","0")
-      .attr("x2","0")
-      .attr("y2",height)
-      .style("stroke","rgb(64,64,64)")
-      .style("stroke-width:1");
-
     svg.selectAll(".layer")
       .attr("opacity", 1)
       .on("mouseover", function(d, i) {
