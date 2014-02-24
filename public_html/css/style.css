@@ -14,15 +14,13 @@ h2 {
   color: #d78a29;
 }
 
-/*
-hashtag {
+.hashtag {
   color: #799a33;
 }
 
-user_mention {
+.user_mention {
   color: #7470c8;
 }
-*/
 
 .axis path, .axis line {
   fill: none;
