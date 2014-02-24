@@ -63,12 +63,12 @@ function chart(csvpath, options) {
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+	
   var graph = d3.csv(csvpath, function(data) {
     data.forEach(function(d) {
       d.value = +d.value;
     });
-
+	
     var layers = stack(nest.entries(data));
 
     x.domain(d3.extent(data, function(d) { return d.date; }));
@@ -122,7 +122,7 @@ function chart(csvpath, options) {
       .on("click", function(d) {
         if (redirect) window.location = d.key + ".html";
       })
-
+	  
       // Vertical bar
       /*
       var vertical = d3.select(".chart")
@@ -141,4 +141,60 @@ function chart(csvpath, options) {
           vertical.style("left", px + "px" );
 	  });*/
   });
+  
+  var events = d3.csv("data/eventos.csv")
+	.get(function(error, rows) 
+	{ 
+		console.log(rows);
+		rows.forEach(function(row)
+		{
+			console.log(x(row.time));
+			svg.append("circle")
+			  .attr("cx",x(row.time))
+			  .attr("cy",height)
+			  .attr("r","2")
+			  .attr("stroke","none")
+			  .attr("stroke-width","3")
+			  .attr("fill","#888888")
+			  .on("mouseover",
+				function()
+				{
+					this.setAttribute("r",5);
+				}
+				)
+			  .on("mouseout",
+				function()
+				{
+					this.setAttribute("r",2);
+				}
+				)
+				;
+/*	
+	svg.append("g")
+	  .attr("id","event_group");
+	  .attr("visibility","hidden")	
+	  .append("text")
+	  .attr("id","event_text");
+	  .attr("x", 0)
+	  .attr("y", height)
+	  .attr("dy", ".35em")
+	  .attr("text-anchor", "middle")
+	  .text("evento");
+
+	
+	svg.append("rect")
+	  .attr("id","event")
+	  .attr("x", bbox.x)
+      .attr("y", bbox.y)
+      .attr("width", bbox.width)
+      .attr("height", bbox.height)
+	  .attr("rx","4")
+	  .attr("ry","4")
+      .attr("stroke","none")
+      .attr("opacity","0.25")
+	  .attr("fill","black")
+	  .attr("visibility","hidden");  
+	*/				
+		})
+	});
 }
