@@ -1,17 +1,20 @@
 <?php
 $data_dir = 'data/';
-$data = 'data5.csv';
-$interval = '5';
-$color_range = "['#c7d436', '#36d441', '#333333', '#d44136', '#4136d4']";
+$candidate = 'all';
+$interval = 5;
+$layers = 75;
+$step = 10;
+#$color_range = "['#d78a29', '#799a33', '#fffc00', '#d44136', '#1671ac']";
 $redirect = 'true';
 
 if ($_GET['candidate']) {
-  $data = $_GET['candidate'] . '5.csv';
+  $candidate = $_GET['candidate'];
   $redirect = 'false';
 }
-$args = "'$data_dir$data', {" . 
+$args = "'$data_dir$candidate$interval.csv', {" . 
   "interval: $interval, " .
-  "color_range: $color_range, " .
+  "layers: $layers, " .
+  "step: $step, " .
   "redirect: $redirect" .
   "}";
 
