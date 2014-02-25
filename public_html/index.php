@@ -1,3 +1,6 @@
+<?php
+
+print <<<EOF
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,3 +17,4 @@
   <div class="chart"/>
 </body>
 </html>
+EOF;
