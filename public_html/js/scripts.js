@@ -1,102 +1,215 @@
-function draw(data) {
-	"use strict";
-	d3.select("body")
-		.append("div")
-			.attr("class", "chart")
-		.selectAll("div.line")
-		.data(data)
-		.enter()
-		.append("div")
-			.attr("class", "line");
-	d3.selectAll("div.line")
-		.append("div")
-			.attr("class", "label")
-			.text( function (d) { return d.hashtag });
-	d3.selectAll("div.line")
-		.append("div")
-			.attr("class", "bar")
-			.style("width", function (d) { return d.count / 100 + "px" })
-			.text(function (d) { return d.count; });
-}
+var t0 = 1390176000000;
 
-function tweets_por_minuto(data) {
-  var margin = 50,
-      width = 700,
-      height = 300,
-      radius = 2;
+function chart(csvpath, options) {
+  var options = options || {};
+  var interval = options.interval || 1;
+  var layers = options.layers || 5;
+  var initial_color = options.initial_color || 0xaad;
+  var step = options.step || Math.floor(initial_color / layers);
+  var color_range = options.color_range ||
+    Array.apply(null, Array(layers)).map(function(_, i) {
+      return "#" + (initial_color + step * i).toString(16);
+    });
+  var redirect = options.redirect || false;
+  var margin = {top: 50, right: 50, bottom: 50, left: 50};
+  var width = document.body.clientWidth - margin.left - margin.right;
+  var height = 600 - margin.top - margin.bottom;
 
-  d3.select("body")
-    .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-    .selectAll("circle")
-    .data(data)
-    .enter()
-    .append("circle");
+  interval = interval * 60000;
 
-  var x_extent =
-    d3.extent(data, function(d) { return d.timestamp });
-  var x_scale =
-    d3.time.scale()
-      .range([margin, width - margin])
-      .domain(x_extent);
+  // Show tooltip
+  var tooltip = d3.select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .style("position", "absolute")
+    .style("visibility", "hidden");
 
-  var y_extent =
-    d3.extent(data, function(d) { return d.count });
-  var y_scale =
-    d3.scale.linear()
-      .range([height - margin, margin])
-      .domain(y_extent);
+  var x = d3.time.scale()
+    .range([0, width]);
 
-  d3.selectAll("circle")
-    .attr("cx", function(d) { return x_scale(d.timestamp) })
-    .attr("cy", function(d) { return y_scale(d.count) });
-  d3.selectAll("circle")
-    .attr("r", radius);
+  var y = d3.scale.linear()
+    .range([height-10, 0]);
 
-  var x_axis = d3.svg.axis().scale(x_scale);
-  d3.select("svg")
+  var z = d3.scale.ordinal()
+    .range(color_range);
+
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left");
+
+  var yAxisr = d3.svg.axis()
+    .scale(y);
+
+  var stack = d3.layout.stack()
+    .offset("wiggle")
+    .values(function(d) { return d.values; })
+    .x(function(d) { return d.date; })
+    .y(function(d) { return d.value; });
+
+  var nest = d3.nest()
+    .key(function(d) { return d.key; });
+
+  var area = d3.svg.area()
+    .interpolate("basis")
+    .x (function(d) { return x(d.date); })
+    .y0(function(d) { return y(d.y0); })
+    .y1(function(d) { return y(d.y0 + d.y); });
+
+  var svg = d3.select(".chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
     .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+  var graph = d3.csv(csvpath, function(data) {
+    data.forEach(function(d) {
+      d.value = +d.value;
+    });
+	
+    var layers = stack(nest.entries(data));
+
+    x.domain(d3.extent(data, function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
+
+    svg.selectAll(".layer")
+      .data(layers)
+      .enter().append("path")
+      .attr("class", "layer")
+      .attr("d", function(d) { return area(d.values); })
+      .style("fill", function(d, i) { return z(i); });
+
+    svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0, " + (height - margin) + ")")
-    .call(x_axis);
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
 
-  var y_axis = d3.svg.axis().scale(y_scale).orient("left");
-  d3.select("svg")
-    .append("g")
+    svg.append("g")
       .attr("class", "y axis")
-      .attr("transform", "translate(" + margin + ", 0)")
-    .call(y_axis);
+      .call(yAxis);
 
-  d3.select(".x.axis")
-    .append("text")
-      .text("hora")
-      .attr("x", (width / 2) - margin)
-      .attr("y", margin / 1.5);
+    d3.select(".x.axis")
+      .append("text")
+      .text("Hora")
+      .attr("x", width / 2)
+      .attr("y", margin.bottom);
 
-  d3.select(".y.axis")
-    .append("text")
-      .text("tweets")
-      .attr("transform", "rotate(90, " + -margin + ", 0)");
+    d3.select(".y.axis")
+      .append("text")
+      .text("Tweets");
 
-  var line = d3.svg.line()
-    .x(function (d) { return x_scale(d.timestamp) })
-    .y(function (d) { return y_scale(d.count) });
+    svg.selectAll(".layer")
+      .attr("opacity", 1)
+      .on("mouseover", function(d, i) {
+        svg.selectAll(".layer").transition()
+          .duration(250)
+          .attr("opacity", function(d, j) {
+            return j != i ? 0.3 : 1;
+          })})
+      .on("mousemove", function(d, i) {
+        coord = d3.mouse(this);
+        var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
+        var msg = d.key + "<br/>" +
+          d.values[i].value + "<br/>" +
+          (new Date(i * interval + t0)).toLocaleTimeString();
 
-  d3.select("svg")
-    .append("path")
-      .attr("d", line(data))
-      .attr("class", "line");
+        d3.select(this)
+          .classed("hover", true)
+          .attr("stroke", "gray");
 
-  d3.selectAll("circle")
-    .on("mouseover", function(d) {
-      d3.select(this)
-        .transition()
-        .attr("r", 2 * radius);
-    })
-    .on("mouseout", function(d) {
-      d3.select(this)
-        .transition()
-        .attr("r", radius);
-    })
+        tooltip.html(msg)
+          .style("visibility", "visible")
+          .style("left", coord[0] + "px")
+          .style("top", coord[1] + "px");
+      })
+      .on("mouseout", function(d, i) {
+        svg.selectAll(".layer")
+          .transition()
+          .duration(250)
+          .attr("opacity", "1");
+        d3.select(this)
+          .classed("hover", false)
+          .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
+      })
+      .on("click", function(d) {
+        if (redirect) window.location = "?candidate=" + d.key;
+      })
+	  
+      // Vertical bar
+      /*
+      var vertical = d3.select(".chart")
+        .append("div")
+        .attr("class", "vertical")
+        .style("position", "absolute")
+        .style("width", "1px")
+        .style("height", height + "px")
+        .style("top", margin.top + "px")
+        .style("bottom", margin.bottom + "px")
+        .style("background", "gray");
+
+      d3.select(".chart")
+        .on("mousemove", function() {
+          px = d3.mouse(this)[0] + 5;
+          vertical.style("left", px + "px" );
+	  });*/
+  });
+  
+  var events = d3.csv("data/eventos.csv")
+	.get(function(error, rows) 
+	{ 
+		console.log(rows);
+		rows.forEach(function(row)
+		{
+			console.log(x(row.time));
+			svg.append("circle")
+			  .attr("cx",x(row.time))
+			  .attr("cy",height)
+			  .attr("r","2")
+			  .attr("stroke","none")
+			  .attr("stroke-width","3")
+			  .attr("fill","#888888")
+			  .on("mouseover",
+				function()
+				{
+					this.setAttribute("r",5);
+				}
+				)
+			  .on("mouseout",
+				function()
+				{
+					this.setAttribute("r",2);
+				}
+				)
+				;
+/*	
+	svg.append("g")
+	  .attr("id","event_group");
+	  .attr("visibility","hidden")	
+	  .append("text")
+	  .attr("id","event_text");
+	  .attr("x", 0)
+	  .attr("y", height)
+	  .attr("dy", ".35em")
+	  .attr("text-anchor", "middle")
+	  .text("evento");
+
+	
+	svg.append("rect")
+	  .attr("id","event")
+	  .attr("x", bbox.x)
+      .attr("y", bbox.y)
+      .attr("width", bbox.width)
+      .attr("height", bbox.height)
+	  .attr("rx","4")
+	  .attr("ry","4")
+      .attr("stroke","none")
+      .attr("opacity","0.25")
+	  .attr("fill","black")
+	  .attr("visibility","hidden");  
+	*/				
+		})
+	});
 }

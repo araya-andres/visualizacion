@@ -27,7 +27,7 @@ print <<<EOF
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu"/>
   <link rel="stylesheet" href="css/style.css"/>
   <script src="js/d3/d3.min.js"></script>
-  <script src="js/streamgraph.js"></script>
+  <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
   <h1>siguiendo el <span class="hashtag">#debateTN7</span> en <span class="user_mention">@twitter</span></h1>
