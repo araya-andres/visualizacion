@@ -1,17 +1,11 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 8px;
-  /*
-  color: #ffffff;
-  background-color: #cccccc;
-  background-color: #1f1f1f;
-  */
+  font-size: 12px;
   background-color: cornsilk;
 }
 
 h1 {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 24px;
   text-align: center;
   color: #1671ac;
 }
@@ -27,6 +21,10 @@ h2 {
 
 .user_mention {
   color: #7470c8;
+}
+
+.axis {
+  font-size: 12px;
 }
 
 .axis path, .axis line {

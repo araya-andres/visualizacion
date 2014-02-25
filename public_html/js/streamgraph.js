@@ -11,8 +11,7 @@ function chart(csvpath, options) {
       return "#" + (initial_color + step * i).toString(16);
     });
   var redirect = options.redirect || false;
-  var offset = options.offset || 0; // hack *temporal* para arreglar la posicion del tooltip
-  var margin = {top: 20, right: 40, bottom: 30, left: 30};
+  var margin = {top: 50, right: 50, bottom: 50, left: 50};
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
 
@@ -39,7 +38,8 @@ function chart(csvpath, options) {
     .orient("bottom");
 
   var yAxis = d3.svg.axis()
-    .scale(y);
+    .scale(y)
+    .orient("left");
 
   var yAxisr = d3.svg.axis()
     .scale(y);
@@ -87,6 +87,20 @@ function chart(csvpath, options) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
+    svg.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+    d3.select(".x.axis")
+      .append("text")
+      .text("Hora")
+      .attr("x", width / 2)
+      .attr("y", margin.bottom);
+
+    d3.select(".y.axis")
+      .append("text")
+      .text("Tweets");
+
     svg.selectAll(".layer")
       .attr("opacity", 1)
       .on("mouseover", function(d, i) {
@@ -109,7 +123,7 @@ function chart(csvpath, options) {
         tooltip.html(msg)
           .style("visibility", "visible")
           .style("left", coord[0] + "px")
-          .style("top", (coord[1] + offset) + "px");
+          .style("top", coord[1] + "px");
       })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
