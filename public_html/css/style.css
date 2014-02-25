@@ -34,14 +34,10 @@ h2 {
 }
 
 .tooltip {
-  font-size: 8px;
+  font-size: 12px;
   padding: 5px;
   color: white;
   background: #1f1f1f;
   border-radius:5px;
-}
-
-.guide
-{
-  vertical-align: middle;
+  opacity: 0.7;
 }
