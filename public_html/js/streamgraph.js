@@ -135,7 +135,7 @@ function chart(csvpath, options) {
           .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
       })
       .on("click", function(d) {
-        if (redirect) window.location = d.key + ".html";
+        if (redirect) window.location = "?candidate=" + d.key;
       })
 	  
       // Vertical bar
