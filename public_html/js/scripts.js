@@ -114,14 +114,15 @@ function chart(csvpath, options) {
         var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
         var msg = d.key + "<br/>" +
           d.values[i].value + "<br/>" +
-          (new Date(i * interval + t0)).toLocaleTimeString();
+          (new Date(i * interval + t0)).toLocaleTimeString() + "-" +
+          (new Date((i + 1) * interval + t0)).toLocaleTimeString();
 
         d3.select(this)
           .classed("hover", true);
 
         tooltip.html(msg)
           .style("visibility", "visible")
-          .style("left", d3.event.pageX + "px")
+          .style("left", (d3.event.pageX - 75) + "px")
           .style("top", d3.event.pageY + "px");
       })
       .on("mouseout", function(d, i) {
