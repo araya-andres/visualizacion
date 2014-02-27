@@ -121,8 +121,8 @@ function chart(csvpath, options) {
 
         tooltip.html(msg)
           .style("visibility", "visible")
-          .style("left", coord[0] + "px")
-          .style("top", coord[1] + "px");
+          .style("left", d3.event.pageX + "px")
+          .style("top", d3.event.pageY + "px");
       })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
