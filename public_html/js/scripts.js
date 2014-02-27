@@ -11,7 +11,7 @@ function chart(csvpath, options) {
       return "#" + (initial_color + step * i).toString(16);
     });
   var redirect = options.redirect || false;
-  var margin = {top: 50, right: 50, bottom: 50, left: 50};
+  var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
 
@@ -114,8 +114,8 @@ function chart(csvpath, options) {
         var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
         var msg = d.key + "<br/>" +
           d.values[i].value + "<br/>" +
-          (new Date(i * interval + t0)).toLocaleTimeString() + "-" +
-          (new Date((i + 1) * interval + t0)).toLocaleTimeString();
+          (new Date(i * interval + t0)).toLocaleTimeString().replace(/:\d+ /, ' ') + " - " +
+          (new Date((i + 1) * interval + t0)).toLocaleTimeString().replace(/:\d+ /, ' ');
 
         d3.select(this)
           .classed("hover", true);
