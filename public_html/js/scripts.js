@@ -102,7 +102,7 @@ function chart(csvpath, options) {
       .text("Tweets");
 
     svg.selectAll(".layer")
-      .attr("opacity", 1)
+      .attr("opacity", 0.6)
       .on("mouseover", function(d, i) {
         svg.selectAll(".layer").transition()
           .duration(250)
@@ -117,8 +117,7 @@ function chart(csvpath, options) {
           (new Date(i * interval + t0)).toLocaleTimeString();
 
         d3.select(this)
-          .classed("hover", true)
-          .attr("stroke", "gray");
+          .classed("hover", true);
 
         tooltip.html(msg)
           .style("visibility", "visible")
@@ -129,7 +128,7 @@ function chart(csvpath, options) {
         svg.selectAll(".layer")
           .transition()
           .duration(250)
-          .attr("opacity", "1");
+          .attr("opacity", 0.6);
         d3.select(this)
           .classed("hover", false)
           .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
