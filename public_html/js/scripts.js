@@ -13,7 +13,7 @@ function chart(csvpath, options) {
   var redirect = options.redirect || false;
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
-  var height = 600 - margin.top - margin.bottom;
+  var height = 550 - margin.top - margin.bottom;
 
   interval = interval * 60000;
 
