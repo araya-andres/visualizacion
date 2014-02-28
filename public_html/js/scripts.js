@@ -141,22 +141,22 @@ function chart(csvpath, options) {
       })
 	  
       // Vertical bar
-      /*
       var vertical = d3.select(".chart")
         .append("div")
         .attr("class", "vertical")
         .style("position", "absolute")
         .style("width", "1px")
         .style("height", height + "px")
-        .style("top", margin.top + "px")
-        .style("bottom", margin.bottom + "px")
         .style("background", "gray");
 
       d3.select(".chart")
         .on("mousemove", function() {
-          px = d3.mouse(this)[0] + 5;
-          vertical.style("left", px + "px" );
-	  });*/
+          var coord = d3.mouse(this);
+          var offset_x = 7; // awful hack
+          var offset_y = d3.event.pageY - coord[1];
+          vertical.style("left", (coord[0] + offset_x) + "px" )
+            .style("top", (margin.top + offset_y) + "px");
+        });
   });
   
   var events = d3.csv("data/eventos.csv")
