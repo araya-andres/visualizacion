@@ -24,6 +24,16 @@ function chart(csvpath, options) {
     .style("position", "absolute")
     .style("visibility", "hidden");
 
+  // Vertical bar
+  var vertical = d3.select(".chart")
+    .append("div")
+    .attr("class", "vertical")
+    .style("position", "absolute")
+    .style("width", "1px")
+    .style("height", height + "px")
+    .style("background", "gray")
+    .style("visibility", "hidden");
+
   var x = d3.time.scale()
     .range([0, width]);
 
@@ -112,12 +122,12 @@ function chart(csvpath, options) {
       .on("mousemove", function(d, i) {
         coord = d3.mouse(this);
         var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
-        var getTime = function (i) {
+        var getHour = function (i) {
           return (new Date(i * interval + t0)).toLocaleTimeString().replace(/:\d+ PM/, '');
         }
         var msg = d.key + "<br/>" +
           d.values[i].value + "<br/>" +
-          getTime(i) + " - " + getTime(i + 1);
+          getHour(i) + " - " + getHour(i + 1);
 
         d3.select(this)
           .classed("hover", true);
@@ -139,25 +149,15 @@ function chart(csvpath, options) {
       .on("click", function(d) {
         if (redirect) window.location = "?candidate=" + d.key;
       })
-	  
-      // Vertical bar
-      var vertical = d3.select(".chart")
-        .append("div")
-        .attr("class", "vertical")
-        .style("position", "absolute")
-        .style("width", "1px")
-        .style("height", height + "px")
-        .style("background", "gray");
 
       d3.select(".chart")
         .on("mousemove", function() {
           var coord = d3.mouse(this);
-          var offset_x = 7; // awful hack
-          var offset_y = d3.event.pageY - coord[1];
+          var offset = [ 7 /* awful hack */, d3.event.pageY - coord[1] ];
           if (coord[0] > margin.left) {
             vertical.style("visibility", "visible")
-              .style("left", (coord[0] + offset_x) + "px" )
-              .style("top", (margin.top + offset_y) + "px");
+              .style("left", (coord[0] + offset[0]) + "px" )
+              .style("top", (margin.top + offset[1]) + "px");
           } else {
             vertical.style("visibility", "hidden");
           }
