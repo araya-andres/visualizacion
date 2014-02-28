@@ -112,10 +112,12 @@ function chart(csvpath, options) {
       .on("mousemove", function(d, i) {
         coord = d3.mouse(this);
         var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
+        var getTime = function (i) {
+          return (new Date(i * interval + t0)).toLocaleTimeString().replace(/:\d+ PM/, '');
+        }
         var msg = d.key + "<br/>" +
           d.values[i].value + "<br/>" +
-          (new Date(i * interval + t0)).toLocaleTimeString().replace(/:\d+ /, ' ') + " - " +
-          (new Date((i + 1) * interval + t0)).toLocaleTimeString().replace(/:\d+ /, ' ');
+          getTime(i) + " - " + getTime(i + 1);
 
         d3.select(this)
           .classed("hover", true);
