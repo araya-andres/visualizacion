@@ -154,8 +154,13 @@ function chart(csvpath, options) {
           var coord = d3.mouse(this);
           var offset_x = 7; // awful hack
           var offset_y = d3.event.pageY - coord[1];
-          vertical.style("left", (coord[0] + offset_x) + "px" )
-            .style("top", (margin.top + offset_y) + "px");
+          if (coord[0] > margin.left) {
+            vertical.style("visibility", "visible")
+              .style("left", (coord[0] + offset_x) + "px" )
+              .style("top", (margin.top + offset_y) + "px");
+          } else {
+            vertical.style("visibility", "hidden");
+          }
         });
   });
   
