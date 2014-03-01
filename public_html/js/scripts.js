@@ -164,59 +164,45 @@ function chart(csvpath, options) {
         });
   });
   
-  var events = d3.csv("data/eventos.csv")
-	.get(function(error, rows) 
-	{ 
-		console.log(rows);
-		rows.forEach(function(row)
-		{
-			console.log(x(row.time));
-			svg.append("circle")
-			  .attr("cx",x(row.time))
-			  .attr("cy",height)
-			  .attr("r","2")
-			  .attr("stroke","none")
-			  .attr("stroke-width","3")
-			  .attr("fill","#888888")
-			  .on("mouseover",
-				function()
-				{
-					this.setAttribute("r",5);
-				}
-				)
-			  .on("mouseout",
-				function()
-				{
-					this.setAttribute("r",2);
-				}
-				)
-				;
-/*	
-	svg.append("g")
-	  .attr("id","event_group");
-	  .attr("visibility","hidden")	
-	  .append("text")
-	  .attr("id","event_text");
-	  .attr("x", 0)
-	  .attr("y", height)
-	  .attr("dy", ".35em")
-	  .attr("text-anchor", "middle")
-	  .text("evento");
+  d3.csv("data/eventos.csv", function(data) {
+    svg.selectAll(".events")
+    .data(data)
+    .enter().append("circle")
+      .attr("cx", function(d) { return x(d.time); })
+      .attr("cy", function(d) { return height; })
+      .attr("r", 2)
+      .attr("fill", "gray")
+    .on("mouseover", function() {
+      this.setAttribute("r", 5);
+    })
+    .on("mouseout", function() {
+      this.setAttribute("r", 2);
+    });
+    /*
+    svg.append("g")
+    .attr("id","event_group");
+    .attr("visibility","hidden")
+    .append("text")
+    .attr("id","event_text");
+    .attr("x", 0)
+    .attr("y", height)
+    .attr("dy", ".35em")
+    .attr("text-anchor", "middle")
+    .text("evento");
 
-	
-	svg.append("rect")
-	  .attr("id","event")
-	  .attr("x", bbox.x)
-      .attr("y", bbox.y)
-      .attr("width", bbox.width)
-      .attr("height", bbox.height)
-	  .attr("rx","4")
-	  .attr("ry","4")
-      .attr("stroke","none")
-      .attr("opacity","0.25")
-	  .attr("fill","black")
-	  .attr("visibility","hidden");  
-	*/				
-		})
-	});
+
+    svg.append("rect")
+    .attr("id","event")
+    .attr("x", bbox.x)
+    .attr("y", bbox.y)
+    .attr("width", bbox.width)
+    .attr("height", bbox.height)
+    .attr("rx","4")
+    .attr("ry","4")
+    .attr("stroke","none")
+    .attr("opacity","0.25")
+    .attr("fill","black")
+    .attr("visibility","hidden");
+     */
+  });
 }
