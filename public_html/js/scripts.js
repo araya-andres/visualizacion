@@ -13,6 +13,7 @@ function chart(csvpath, options) {
     });
   var redirect = options.redirect || false;
   var y_axis_title = options.y_axis_title || "Tweets";
+  var back_button_visibility = options.back_button_visibility || "hidden";
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 500 - margin.top - margin.bottom;
@@ -35,6 +36,16 @@ function chart(csvpath, options) {
     .style("height", height + "px")
     .style("background", "gray")
     .style("visibility", "hidden");
+
+  var back_button = d3.select(".chart")
+    .append("div")
+    .attr("class", "button")
+    .style("position", "relative")
+    .style("top", "0px")
+    .style("left", width + "px")
+    .style("visibility", back_button_visibility)
+    .html("< atrás")
+    .on("click", function(d) { window.location = "index.php"; });
 
   var x = d3.time.scale()
     .range([0, width])

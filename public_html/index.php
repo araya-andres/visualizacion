@@ -7,12 +7,14 @@ $step = 10;
 #$color_range = "['#d78a29', '#799a33', '#fffc00', '#d44136', '#1671ac']";
 $redirect = 'true';
 $y_axis_title = "Tweets";
+$back_button_visibility = "hidden";
 $chart_title = "Tweets por candidato por tiempo";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
   $y_axis_title = "Hashtags";
   $chart_title = "Hashtags para " . ucfirst($candidate) . " por tiempo";
+  $back_button_visibility = "visible";
   $redirect = 'false';
 }
 $args = "'$data_dir$candidate$interval.csv', {" . 
@@ -20,6 +22,7 @@ $args = "'$data_dir$candidate$interval.csv', {" .
   "layers: $layers, " .
   "step: $step, " .
   "y_axis_title: '$y_axis_title', " .
+  "back_button_visibility: '$back_button_visibility', " .
   "redirect: $redirect" .
   "}";
 
