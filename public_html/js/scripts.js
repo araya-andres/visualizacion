@@ -171,38 +171,19 @@ function chart(csvpath, options) {
       .attr("cx", function(d) { return x(d.time); })
       .attr("cy", function(d) { return height; })
       .attr("r", 2)
-      .attr("fill", "gray")
-    .on("mouseover", function() {
+      .attr("fill", "gray");
+  svg.selectAll("circle")
+    .on("mouseover", function(d) {
+      var offset = -40;
       this.setAttribute("r", 5);
+      tooltip.html(d.event)
+        .style("visibility", "visible")
+        .style("left", x(d.time) + "px")
+        .style("top", (d3.event.pageY + offset) + "px");
     })
     .on("mouseout", function() {
       this.setAttribute("r", 2);
+      tooltip.style("visibility", "hidden");
     });
-    /*
-    svg.append("g")
-    .attr("id","event_group");
-    .attr("visibility","hidden")
-    .append("text")
-    .attr("id","event_text");
-    .attr("x", 0)
-    .attr("y", height)
-    .attr("dy", ".35em")
-    .attr("text-anchor", "middle")
-    .text("evento");
-
-
-    svg.append("rect")
-    .attr("id","event")
-    .attr("x", bbox.x)
-    .attr("y", bbox.y)
-    .attr("width", bbox.width)
-    .attr("height", bbox.height)
-    .attr("rx","4")
-    .attr("ry","4")
-    .attr("stroke","none")
-    .attr("opacity","0.25")
-    .attr("fill","black")
-    .attr("visibility","hidden");
-     */
   });
 }
