@@ -1,6 +1,11 @@
 var t0 = 1390176000000; /*  6:00 pm */
 var t1 = 1390197600000; /* 12:00 am */
 
+
+function getHour(epoch) {
+  return (new Date(epoch)).toLocaleTimeString().replace(/:\d+ PM/, '');
+}
+
 function chart(csvpath, options) {
   var options = options || {};
   var interval = options.interval || 1;
@@ -137,12 +142,10 @@ function chart(csvpath, options) {
       .on("mousemove", function(d, i) {
         coord = d3.mouse(this);
         var i = Math.floor((x.invert(coord[0]).getTime() - t0) / interval);
-        var getHour = function (i) {
-          return (new Date(i * interval + t0)).toLocaleTimeString().replace(/:\d+ PM/, '');
-        }
+        var indexToEpoch = function(i) { return i * interval + t0; };
         var msg = d.key + "<br/>" +
           d.values[i].value + "<br/>" +
-          getHour(i) + " - " + getHour(i + 1);
+          getHour(indexToEpoch(i)) + " - " + getHour(indexToEpoch(i + 1));
 
         d3.select(this)
           .classed("hover", true);
@@ -200,7 +203,9 @@ function chart(csvpath, options) {
       .on("mouseover", function(d) {
         var offset_y = -40;
         this.setAttribute("r", r1);
-        tooltip.html(d.event)
+        var msg = d.event + " (" + 
+                  getHour(x.invert(d3.mouse(this)[0])) + ")";
+        tooltip.html(msg)
           .style("visibility", "visible")
           .style("left", d3.event.pageX + "px")
           .style("top", (d3.event.pageY + offset_y) + "px");
