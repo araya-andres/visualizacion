@@ -1,4 +1,5 @@
 var t0 = 1390176000000;
+var t1 = 1390197600000;
 
 function chart(csvpath, options) {
   var options = options || {};
@@ -35,7 +36,8 @@ function chart(csvpath, options) {
     .style("visibility", "hidden");
 
   var x = d3.time.scale()
-    .range([0, width]);
+    .range([0, width])
+    .domain([t0, t1]);
 
   var y = d3.scale.linear()
     .range([height-10, 0]);
@@ -82,7 +84,6 @@ function chart(csvpath, options) {
 	
     var layers = stack(nest.entries(data));
 
-    x.domain(d3.extent(data, function(d) { return d.date; }));
     y.domain([0, d3.max(data, function(d) { return d.y0 + d.y; })]);
 
     svg.selectAll(".layer")
@@ -165,6 +166,9 @@ function chart(csvpath, options) {
   });
   
   d3.csv("data/eventos.csv", function(data) {
+    var x = d3.time.scale()
+      .range([0, width])
+      .domain([t0, t1]); /* shouldn't be necessary, but it is... */
     svg.selectAll(".events")
     .data(data)
     .enter().append("circle")
