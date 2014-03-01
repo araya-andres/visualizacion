@@ -4,7 +4,14 @@ $candidate = 'all';
 $interval = 5;
 $layers = 75;
 $step = 10;
-#$color_range = "['#d78a29', '#799a33', '#fffc00', '#d44136', '#1671ac']";
+
+$york = "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']"; // http://www.colourlovers.com/palette/3264234/York
+$crystal = "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']"; // http://www.colourlovers.com/palette/3264234/Crystal
+$creme = "['#e3dd7a', '#c5bf69', '#a4a05e', '#6b6b3b', '#403e21']"; // http://www.colourlovers.com/palette/3264234/Creme
+$blush = "['#982e2e', '#c49292', '#efdcd2', '#d2bbaf', '#b48989']"; // http://www.colourlovers.com/palette/3264234/Blush
+$green_quite = "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']"; // http://www.colourlovers.com/palette/3264234/Green_quite
+$frozen = "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']"; // http://www.colourlovers.com/palette/3264234/Frozen
+
 $redirect = 'true';
 $y_axis_title = "Tweets";
 $back_button_visibility = "hidden";
@@ -18,9 +25,8 @@ if ($_GET['candidate']) {
   $redirect = 'false';
 }
 $args = "'$data_dir$candidate$interval.csv', {" . 
+  "color_range: $frozen, " .
   "interval: $interval, " .
-  "layers: $layers, " .
-  "step: $step, " .
   "y_axis_title: '$y_axis_title', " .
   "back_button_visibility: '$back_button_visibility', " .
   "redirect: $redirect" .
