@@ -75,7 +75,7 @@ function chart(csvpath, options) {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
-  var graph = d3.csv(csvpath, function(data) {
+  d3.csv(csvpath, function(data) {
     data.forEach(function(d) {
       d.value = +d.value;
     });
@@ -172,18 +172,18 @@ function chart(csvpath, options) {
       .attr("cy", function(d) { return height; })
       .attr("r", 2)
       .attr("fill", "gray");
-  svg.selectAll("circle")
-    .on("mouseover", function(d) {
-      var offset = -40;
-      this.setAttribute("r", 5);
-      tooltip.html(d.event)
-        .style("visibility", "visible")
-        .style("left", x(d.time) + "px")
-        .style("top", (d3.event.pageY + offset) + "px");
-    })
-    .on("mouseout", function() {
-      this.setAttribute("r", 2);
-      tooltip.style("visibility", "hidden");
-    });
+    svg.selectAll("circle")
+      .on("mouseover", function(d) {
+        var offset = -40;
+        this.setAttribute("r", 5);
+        tooltip.html(d.event)
+          .style("visibility", "visible")
+          .style("left", x(d.time) + "px")
+          .style("top", (d3.event.pageY + offset) + "px");
+      })
+      .on("mouseout", function() {
+        this.setAttribute("r", 2);
+        tooltip.style("visibility", "hidden");
+      });
   });
 }
