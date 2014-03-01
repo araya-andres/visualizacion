@@ -1,5 +1,5 @@
-var t0 = 1390176000000;
-var t1 = 1390197600000;
+var t0 = 1390176000000; /*  6:00 pm */
+var t1 = 1390197600000; /* 12:00 am */
 
 function chart(csvpath, options) {
   var options = options || {};
@@ -12,6 +12,7 @@ function chart(csvpath, options) {
       return "#" + (initial_color + step * i).toString(16);
     });
   var redirect = options.redirect || false;
+  var y_axis_title = options.y_axis_title || "Tweets";
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
   var height = 550 - margin.top - margin.bottom;
@@ -110,15 +111,17 @@ function chart(csvpath, options) {
 
     d3.select(".y.axis")
       .append("text")
-      .text("Tweets");
+      .text(y_axis_title);
+
+    var opacity = [ 0.2, 0.6, 1 ];
 
     svg.selectAll(".layer")
-      .attr("opacity", 0.6)
+      .attr("opacity", opacity[1])
       .on("mouseover", function(d, i) {
         svg.selectAll(".layer").transition()
           .duration(250)
           .attr("opacity", function(d, j) {
-            return j != i ? 0.2 : 1;
+            return j != i ? opacity[0] : opacity[2];
           })})
       .on("mousemove", function(d, i) {
         coord = d3.mouse(this);
@@ -133,16 +136,17 @@ function chart(csvpath, options) {
         d3.select(this)
           .classed("hover", true);
 
+        var offset_x = 10;
         tooltip.html(msg)
           .style("visibility", "visible")
-          .style("left", (d3.event.pageX - 75) + "px")
+          .style("left", (d3.event.pageX + offset_x) + "px")
           .style("top", d3.event.pageY + "px");
       })
       .on("mouseout", function(d, i) {
         svg.selectAll(".layer")
           .transition()
           .duration(250)
-          .attr("opacity", 0.6);
+          .attr("opacity", opacity[1]);
         d3.select(this)
           .classed("hover", false)
           .attr("stroke-width", "0px"), tooltip.style("visibility", "hidden");
@@ -169,24 +173,26 @@ function chart(csvpath, options) {
     var x = d3.time.scale()
       .range([0, width])
       .domain([t0, t1]); /* shouldn't be necessary, but it is... */
+    var r0 = 2;
+    var r1 = 2 * r0;
     svg.selectAll(".events")
     .data(data)
     .enter().append("circle")
       .attr("cx", function(d) { return x(d.time); })
       .attr("cy", function(d) { return height; })
-      .attr("r", 2)
+      .attr("r", r0)
       .attr("fill", "gray");
     svg.selectAll("circle")
       .on("mouseover", function(d) {
-        var offset = -40;
-        this.setAttribute("r", 5);
+        var offset_y = -40;
+        this.setAttribute("r", r1);
         tooltip.html(d.event)
           .style("visibility", "visible")
-          .style("left", x(d.time) + "px")
-          .style("top", (d3.event.pageY + offset) + "px");
+          .style("left", d3.event.pageX + "px")
+          .style("top", (d3.event.pageY + offset_y) + "px");
       })
       .on("mouseout", function() {
-        this.setAttribute("r", 2);
+        this.setAttribute("r", r0);
         tooltip.style("visibility", "hidden");
       });
   });
