@@ -169,7 +169,10 @@ function chart(csvpath, options) {
       d3.select(".chart")
         .on("mousemove", function() {
           var coord = d3.mouse(this);
-          var offset = [ 7 /* awful hack */, d3.event.pageY - coord[1] ];
+          var offset = [
+            7 /* awful hack */,
+            d3.event.pageY - coord[1] + 16 /* 'go back' button */
+          ];
           if (coord[0] > margin.left) {
             vertical.style("visibility", "visible")
               .style("left", (coord[0] + offset[0]) + "px" )
