@@ -7,9 +7,12 @@ $step = 10;
 #$color_range = "['#d78a29', '#799a33', '#fffc00', '#d44136', '#1671ac']";
 $redirect = 'true';
 $y_axis_title = "Tweets";
+$chart_title = "Tweets por candidato por tiempo";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
+  $y_axis_title = "Hashtags";
+  $chart_title = "Hashtags para " . ucfirst($candidate) . " por tiempo";
   $redirect = 'false';
 }
 $args = "'$data_dir$candidate$interval.csv', {" . 
@@ -33,7 +36,8 @@ print <<<EOF
 </head>
 <body onload="chart($args)">
   <h1>siguiendo el <span class="hashtag">#debateTN7</span> en <span class="user_mention">@twitter</span></h1>
-  <h2>@AndresAraya, @RodrigoHernandez</h2>
+  <h2>@andres_araya, @rodrigo_hernandez</h2>
+  <h3>$chart_title</h3>
   <div class="chart"></div>
 </body>
 </html>
