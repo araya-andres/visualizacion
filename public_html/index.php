@@ -6,6 +6,7 @@ $layers = 75;
 $step = 10;
 #$color_range = "['#d78a29', '#799a33', '#fffc00', '#d44136', '#1671ac']";
 $redirect = 'true';
+$y_axis_title = "Tweets";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
@@ -15,6 +16,7 @@ $args = "'$data_dir$candidate$interval.csv', {" .
   "interval: $interval, " .
   "layers: $layers, " .
   "step: $step, " .
+  "y_axis_title: '$y_axis_title', " .
   "redirect: $redirect" .
   "}";
 
