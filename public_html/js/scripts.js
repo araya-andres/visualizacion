@@ -126,8 +126,8 @@ function chart(csvpath, options) {
 
         d3.select(this)
           .classed("hover", true)
-          .attr("stroke", "darkblue")
-          .attr("stroke-width", "1");
+          .attr("stroke", "#000033")
+          .attr("stroke-width", "0.5");
 
         var offset_x = 10;
         tooltip.html(msg)
@@ -169,7 +169,7 @@ function chart(csvpath, options) {
     var x = d3.time.scale()
       .range([0, width])
       .domain([t0, t1]); /* shouldn't be necessary, but it is... */
-    var r0 = 2;
+    var r0 = 3;
     var r1 = 2 * r0;
     svg.selectAll(".events")
     .data(data)
@@ -177,6 +177,7 @@ function chart(csvpath, options) {
       .attr("cx", function(d) { return x(d.time); })
       .attr("cy", function(d) { return height; })
       .attr("r", r0)
+      .attr("stroke", "white")
       .attr("fill", "gray");
     svg.selectAll("circle")
       .on("mouseover", function(d) {
