@@ -2,8 +2,13 @@
 $data_dir = 'data/';
 $candidate = 'all';
 $interval = 5;
-$layers = 75;
-$step = 10;
+$full_name = array(
+  "araya" => "Johnny Araya",
+  "guevara" => "Otto Guevara",
+  "piza" => "Rodolfo Piza",
+  "solis" => "Luis Guillermo Solís",
+  "villalta" => "José María Villalta"
+);
 
 $york = "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']"; // http://www.colourlovers.com/palette/3264234/York
 $crystal = "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']"; // http://www.colourlovers.com/palette/3264234/Crystal
@@ -18,7 +23,7 @@ $chart_title = "Tweets por candidato por tiempo";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
-  $chart_title = "Hashtags para " . ucfirst($candidate) . " por tiempo";
+  $chart_title = "Hashtags para " . $full_name[$candidate] . " por tiempo";
   $back_button_visibility = "visible";
   $redirect = 'false';
 }
@@ -41,9 +46,12 @@ print <<<EOF
   <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
-  <h1>siguiendo el #debateTN7 en @twitter</h1>
-  <h2>@andres_araya, @rodrigo_hernandez</h2>
-  <h3>$chart_title</h3>
+  <h1>$chart_title</h1>
+  <p>
+    siguiendo el <strong>#debate</strong> en <strong>@twitter</strong></br>
+    andrés <strong>araya</strong><br/>
+    rodrigo <strong>hernández</strong>
+  </p>
   <div class="chart"></div>
 </body>
 </html>
