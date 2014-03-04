@@ -7,28 +7,18 @@ h1 {
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
   line-height: .5em;
-  color: #1671ac;
 }
 
 h2 {
   text-align: center;
   line-height: .5em;
   letter-spacing: 0.18em;
-  color: #d78a29;
 }
 
 h3 {
   text-align: center;
   font-size: 1.5em;
   line-height: 1.5em;
-}
-
-.hashtag {
-  color: #799a33;
-}
-
-.user_mention {
-  color: #7470c8;
 }
 
 .axis {

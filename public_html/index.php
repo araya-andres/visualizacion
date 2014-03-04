@@ -41,7 +41,7 @@ print <<<EOF
   <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
-  <h1>siguiendo el <span class="hashtag">#debateTN7</span> en <span class="user_mention">@twitter</span></h1>
+  <h1>siguiendo el #debateTN7 en @twitter</h1>
   <h2>@andres_araya, @rodrigo_hernandez</h2>
   <h3>$chart_title</h3>
   <div class="chart"></div>
