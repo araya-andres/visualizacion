@@ -125,7 +125,9 @@ function chart(csvpath, options) {
           getHour(indexToEpoch(i)) + " - " + getHour(indexToEpoch(i + 1));
 
         d3.select(this)
-          .classed("hover", true);
+          .classed("hover", true)
+          .attr("stroke", "darkblue")
+          .attr("stroke-width", "1");
 
         var offset_x = 10;
         tooltip.html(msg)
