@@ -9,13 +9,7 @@ function getHour(epoch) {
 function chart(csvpath, options) {
   var options = options || {};
   var interval = options.interval || 1;
-  var layers = options.layers || 5;
-  var initial_color = options.initial_color || 0xaad;
-  var step = options.step || Math.floor(initial_color / layers);
-  var color_range = options.color_range ||
-    Array.apply(null, Array(layers)).map(function(_, i) {
-      return "#" + (initial_color + step * i).toString(16);
-    });
+  var color_range = options.color_range;
   var redirect = options.redirect || false;
   var back_button_visibility = options.back_button_visibility || "hidden";
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
