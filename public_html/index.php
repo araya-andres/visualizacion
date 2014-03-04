@@ -46,12 +46,18 @@ print <<<EOF
   <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
-  <h1>$chart_title</h1>
-  <p>
-    siguiendo el <strong>#debate</strong> en <strong>@twitter</strong></br>
-    andrés <strong>araya</strong><br/>
-    rodrigo <strong>hernández</strong>
-  </p>
+  <div id='container'>
+    <div id='left'>
+      <h1>$chart_title</h1>
+    </div>
+    <div id='right'>
+      <p>
+        siguiendo el #debate en @twitter<br/>
+        andrés araya<br/>
+        rodrigo hernández
+      </p>
+    </div>
+  </div>
   <div class="chart"></div>
 </body>
 </html>

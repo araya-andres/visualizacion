@@ -5,6 +5,20 @@ body {
 
 h1 {
   font-family: 'Ubuntu', sans-serif;
+  font-size: 28px;
+}
+
+#left {
+  float: left;
+  margin: 20px;
+}
+
+#right {
+  float: right;
+  text-align: right;
+  font-size: 11px;
+  font-color: darkgray;
+  margin: 20px;
 }
 
 .axis {
