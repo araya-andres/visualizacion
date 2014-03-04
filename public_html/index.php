@@ -46,19 +46,11 @@ print <<<EOF
   <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
-  <div id='container'>
-    <div id='left'>
-      <h1>$chart_title</h1>
-    </div>
-    <div id='right'>
-      <p>
-        siguiendo el #debate en @twitter<br/>
-        andrés araya, rodrigo hernández<br/>
-        ms-8832 visualización de información<br/>
-        ph.d. franklin hernández-castro<br/>
-      </p>
-    </div>
-  </div>
+  <h1>$chart_title</h1>
+  <p>
+    siguiendo el #debate en @twitter<br/>
+    andrés araya, rodrigo hernández
+  </p>
   <div class="chart"></div>
 </body>
 </html>
