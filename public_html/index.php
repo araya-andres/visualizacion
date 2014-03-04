@@ -53,8 +53,9 @@ print <<<EOF
     <div id='right'>
       <p>
         siguiendo el #debate en @twitter<br/>
-        andrés araya<br/>
-        rodrigo hernández
+        andrés araya, rodrigo hernández<br/>
+        ms-8832 visualización de información<br/>
+        ph.d. franklin hernández-castro<br/>
       </p>
     </div>
   </div>
