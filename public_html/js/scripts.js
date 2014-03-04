@@ -66,13 +66,6 @@ function chart(csvpath, options) {
     .scale(x)
     .orient("bottom");
 
-  var yAxis = d3.svg.axis()
-    .scale(y)
-    .orient("left");
-
-  var yAxisr = d3.svg.axis()
-    .scale(y);
-
   var stack = d3.layout.stack()
     .offset("wiggle")
     .values(function(d) { return d.values; })
@@ -115,19 +108,11 @@ function chart(csvpath, options) {
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
-    svg.append("g")
-      .attr("class", "y axis")
-      .call(yAxis);
-
     d3.select(".x.axis")
       .append("text")
       .text("Hora")
       .attr("x", width / 2)
       .attr("y", margin.bottom);
-
-    d3.select(".y.axis")
-      .append("text")
-      .text(y_axis_title);
 
     var opacity = [ 0.2, 0.6, 1 ];
 
