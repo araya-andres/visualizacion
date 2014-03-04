@@ -42,8 +42,7 @@ function chart(csvpath, options) {
     .style("top", "0px")
     .style("left", width + "px")
     .style("visibility", back_button_visibility)
-    .html("< atrás")
-    .on("click", function(d) { window.location = "index.php"; });
+    .html("<a href='index.php'>< atrás</href>")
 
   var x = d3.time.scale()
     .range([0, width])
