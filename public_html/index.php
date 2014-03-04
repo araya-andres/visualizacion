@@ -13,13 +13,11 @@ $green_quite = "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']"; // htt
 $frozen = "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']"; // http://www.colourlovers.com/palette/3264234/Frozen
 
 $redirect = 'true';
-$y_axis_title = "Tweets";
 $back_button_visibility = "hidden";
 $chart_title = "Tweets por candidato por tiempo";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
-  $y_axis_title = "Hashtags";
   $chart_title = "Hashtags para " . ucfirst($candidate) . " por tiempo";
   $back_button_visibility = "visible";
   $redirect = 'false';
@@ -27,7 +25,6 @@ if ($_GET['candidate']) {
 $args = "'$data_dir$candidate$interval.csv', {" . 
   "color_range: $frozen, " .
   "interval: $interval, " .
-  "y_axis_title: '$y_axis_title', " .
   "back_button_visibility: '$back_button_visibility', " .
   "redirect: $redirect" .
   "}";

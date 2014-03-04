@@ -17,7 +17,6 @@ function chart(csvpath, options) {
       return "#" + (initial_color + step * i).toString(16);
     });
   var redirect = options.redirect || false;
-  var y_axis_title = options.y_axis_title || "Tweets";
   var back_button_visibility = options.back_button_visibility || "hidden";
   var margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
