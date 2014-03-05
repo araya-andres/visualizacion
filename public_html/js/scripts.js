@@ -11,10 +11,9 @@ function chart(csvpath, options) {
   var interval = options.interval || 1;
   var color_range = options.color_range;
   var redirect = options.redirect || false;
-  var back_button_visibility = options.back_button_visibility || "hidden";
-  var margin = { top: 50, right: 50, bottom: 50, left: 50 };
+  var margin = { top: 75, right: 50, bottom: 50, left: 50 };
   var width = document.body.clientWidth - margin.left - margin.right;
-  var height = 500 - margin.top - margin.bottom;
+  var height = 650 - margin.top - margin.bottom;
 
   interval = interval * 60000;
 
@@ -34,15 +33,6 @@ function chart(csvpath, options) {
     .style("height", height + "px")
     .style("background", "gray")
     .style("visibility", "hidden");
-
-  var back_button = d3.select(".chart")
-    .append("div")
-    .attr("class", "button")
-    .style("position", "relative")
-    .style("top", "0px")
-    .style("left", width + "px")
-    .style("visibility", back_button_visibility)
-    .html("<a href='index.php'>< atrás</href>")
 
   var x = d3.time.scale()
     .range([0, width])
@@ -153,7 +143,7 @@ function chart(csvpath, options) {
           var coord = d3.mouse(this);
           var offset = [
             7 /* awful hack */,
-            d3.event.pageY - coord[1] + 16 /* 'go back' button */
+            d3.event.pageY - coord[1]
           ];
           if (coord[0] > margin.left) {
             vertical.style("visibility", "visible")

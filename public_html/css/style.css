@@ -3,19 +3,27 @@ body {
   font-size: 10px;
 }
 
-h1 {
+h1, h2 {
   font-family: 'Ubuntu', sans-serif;
+  line-height: 0.5em;
 }
 
-#left {
-  float: left;
-  margin: 20px;
+h2 {
+  color: gray;
 }
 
-#right {
-  float: right;
+.left {
+  position: absolute;
+  top: 0px;
+  margin-left: 50px;
+}
+
+.right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
   text-align: right;
-  margin: 20px;
+  margin-right: 55px;
 }
 
 .axis {

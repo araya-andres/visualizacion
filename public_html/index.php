@@ -18,19 +18,18 @@ $green_quite = "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']"; // htt
 $frozen = "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']"; // http://www.colourlovers.com/palette/3264234/Frozen
 
 $redirect = 'true';
-$back_button_visibility = "hidden";
-$chart_title = "Tweets por candidato por tiempo";
+$back_button = "";
+$chart_title = "tweets por candidato por tiempo";
 
 if ($_GET['candidate']) {
   $candidate = $_GET['candidate'];
-  $chart_title = "Hashtags para " . $full_name[$candidate] . " por tiempo";
-  $back_button_visibility = "visible";
+  $chart_title = "hashtags para " . $full_name[$candidate] . " por tiempo";
+  $back_button = "<br/><a href='index.php'>< atrás</a>";
   $redirect = 'false';
 }
 $args = "'$data_dir$candidate$interval.csv', {" . 
   "color_range: $frozen, " .
   "interval: $interval, " .
-  "back_button_visibility: '$back_button_visibility', " .
   "redirect: $redirect" .
   "}";
 
@@ -46,12 +45,20 @@ print <<<EOF
   <script src="js/scripts.js"></script>
 </head>
 <body onload="chart($args)">
-  <h1>$chart_title</h1>
-  <p>
-    siguiendo el #debate en @twitter<br/>
-    andrés araya, rodrigo hernández
-  </p>
-  <div class="chart"></div>
+  <div class="left">
+    <h1>$chart_title</h1>
+    <h2>siguiendo el #debate en @twitter</h2>
+  </div>
+  <div class="right">
+    <p>
+      andrés araya, rodrigo hernández</br>
+      mc-8832 visualización de información</br>
+      ph.d. franklin hernández-castro</br>
+      $back_button
+    </p>
+  </div>
+  <div class="chart">
+  </div>
 </body>
 </html>
 EOF;
