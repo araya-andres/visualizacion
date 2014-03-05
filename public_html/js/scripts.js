@@ -96,7 +96,7 @@ function chart(csvpath, options) {
       .attr("x", width / 2)
       .attr("y", margin.bottom);
 
-    var opacity = [ 0.2, 0.6, 1 ];
+    var opacity = [ 0.4, 1, 1 ];
 
     svg.selectAll(".layer")
       .attr("opacity", opacity[1])
