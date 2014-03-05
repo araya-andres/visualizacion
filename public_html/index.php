@@ -10,13 +10,16 @@ $full_name = array(
   "villalta" => "José María Villalta"
 );
 
-$york = "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']"; // http://www.colourlovers.com/palette/3264234/York
-$crystal = "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']"; // http://www.colourlovers.com/palette/3264234/Crystal
-$creme = "['#e3dd7a', '#c5bf69', '#a4a05e', '#6b6b3b', '#403e21']"; // http://www.colourlovers.com/palette/3264234/Creme
-$blush = "['#982e2e', '#c49292', '#efdcd2', '#d2bbaf', '#b48989']"; // http://www.colourlovers.com/palette/3264234/Blush
-$green_quite = "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']"; // http://www.colourlovers.com/palette/3264234/Green_quite
-$frozen = "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']"; // http://www.colourlovers.com/palette/3264234/Frozen
+$palette = array(
+  "york" => "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']", // http://www.colourlovers.com/palette_name_name/3264234/York
+  "crystal" => "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']", // http://www.colourlovers.com/palette_name/3264234/Crystal
+  "creme" => "['#e3dd7a', '#c5bf69', '#a4a05e', '#6b6b3b', '#403e21']", // http://www.colourlovers.com/palette_name_name/3264234/Creme
+  "blush" => "['#982e2e', '#c49292', '#efdcd2', '#d2bbaf', '#b48989']", // http://www.colourlovers.com/palette_name_name/3264234/Blush
+  "green_quite" => "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']", // http://www.colourlovers.com/palette_name/3264234/Green_quite
+  "frozen" => "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']", // http://www.colourlovers.com/palette/3264234/Frozen
+);
 
+$palette_name = "frozen";
 $redirect = 'true';
 $back_button = "";
 $chart_title = "tweets por candidato por tiempo";
@@ -27,8 +30,17 @@ if ($_GET['candidate']) {
   $back_button = "<br/><a href='index.php'>< atrás</a>";
   $redirect = 'false';
 }
+
+if ($_GET['interval']) {
+  $interval = $_GET['interval'];
+}
+
+if ($_GET['palette']) {
+  $palette_name = $_GET['palette'];
+}
+
 $args = "'$data_dir$candidate$interval.csv', {" . 
-  "color_range: $frozen, " .
+  "color_range: $palette[$palette_name], " .
   "interval: $interval, " .
   "redirect: $redirect" .
   "}";
