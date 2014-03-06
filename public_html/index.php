@@ -11,12 +11,16 @@ $full_name = array(
 );
 
 $palette = array(
-  "york" => "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']", // http://www.colourlovers.com/palette_name_name/3264234/York
-  "crystal" => "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']", // http://www.colourlovers.com/palette_name/3264234/Crystal
-  "creme" => "['#e3dd7a', '#c5bf69', '#a4a05e', '#6b6b3b', '#403e21']", // http://www.colourlovers.com/palette_name_name/3264234/Creme
   "blush" => "['#982e2e', '#c49292', '#efdcd2', '#d2bbaf', '#b48989']", // http://www.colourlovers.com/palette_name_name/3264234/Blush
-  "green_quite" => "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']", // http://www.colourlovers.com/palette_name/3264234/Green_quite
+  "blueish" => "['#1f2428', '#425363', '#a4c4dd', '#166eb5', '#033e84']", // http://www.colourlovers.com/palette_name_name/3270321/blueish
+  "creme" => "['#e3dd7a', '#c5bf69', '#a4a05e', '#6b6b3b', '#403e21']", // http://www.colourlovers.com/palette_name_name/3264234/Creme
+  "crystal" => "['#097d8d', '#b4e2e8', '#010e10', '#1d3538', '#526c70']", // http://www.colourlovers.com/palette_name/3264234/Crystal
   "frozen" => "['#1c5193', '#307cb0', '#3e84c9', '#a8c5d5', '#afe6ff']", // http://www.colourlovers.com/palette/3264234/Frozen
+  "green_quite" => "['#aae694', '#cfe5c7', '#c1cdc0', '#86a294', '#708e80']", // http://www.colourlovers.com/palette_name/3264234/Green_quite
+  "mono" => "['#05267a', '#4867b8', '#586da1', '#778ab8', '#bfcef2']", // http://www.colourlovers.com/palette/2007392/monocromatic_theme
+  "mono2" => "['#a0bcd4', '#5792c5', '#64adec', '#477aa6', '#8ecafe']", // http://www.colourlovers.com/palette/3194990/Monocromatic_Blue
+  "punch" => "['#606060', '#304848', '#486060', '#789090', '#90a8a8']", // http://www.colourlovers.com/palette/67884/PunchkickInteractive
+  "york" => "['#656e3f', '#cfdb9d', '#c8aee5', '#48276d', '#1e0a34']", // http://www.colourlovers.com/palette_name_name/3264234/York
 );
 
 $palette_name = "frozen";
