@@ -159,20 +159,21 @@ function chart(csvpath, options) {
     var x = d3.time.scale()
       .range([0, width])
       .domain([t0, t1]); /* shouldn't be necessary, but it is... */
-    var r0 = 3;
-    var r1 = 2 * r0;
+    var r = [3, 5];
+    var fill = ["gray", "gray"]
     svg.selectAll(".events")
     .data(data)
     .enter().append("circle")
       .attr("cx", function(d) { return x(d.time); })
       .attr("cy", function(d) { return height; })
-      .attr("r", r0)
+      .attr("r", r[0])
       .attr("stroke", "white")
-      .attr("fill", "gray");
+      .attr("fill", fill[0]);
     svg.selectAll("circle")
       .on("mouseover", function(d) {
         var offset_y = -40;
-        this.setAttribute("r", r1);
+        this.setAttribute("r", r[1]);
+        this.setAttribute("fill", fill[1]);
         var msg = d.event + " (" + 
                   getHour(x.invert(d3.mouse(this)[0])) + ")";
         tooltip.html(msg)
@@ -181,7 +182,8 @@ function chart(csvpath, options) {
           .style("top", (d3.event.pageY + offset_y) + "px");
       })
       .on("mouseout", function() {
-        this.setAttribute("r", r0);
+        this.setAttribute("r", r[0]);
+        this.setAttribute("fill", fill[0]);
         tooltip.style("visibility", "hidden");
       });
   });
