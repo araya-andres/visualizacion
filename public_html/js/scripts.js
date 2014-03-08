@@ -1,5 +1,5 @@
 var t0 = 1390176000000; /*  6:00 pm */
-var t1 = 1390197600000; /* 12:00 am */
+var t1 = 1390192200000; /* 10:30 pm */
 
 
 function getHour(epoch) {
@@ -116,7 +116,7 @@ function chart(csvpath, options) {
 
         d3.select(this)
           .classed("hover", true)
-          .attr("stroke", "#000033")
+          .attr("stroke", color_range[0])
           .attr("stroke-width", "0.5");
 
         var offset_x = 10;
@@ -159,21 +159,33 @@ function chart(csvpath, options) {
     var x = d3.time.scale()
       .range([0, width])
       .domain([t0, t1]); /* shouldn't be necessary, but it is... */
-    var r = [3, 5];
-    var fill = ["gray", "gray"]
+    var r = [3, 4];
+    var h = 12;
+    var color = "gray";
     svg.selectAll(".events")
     .data(data)
-    .enter().append("circle")
-      .attr("cx", function(d) { return x(d.time); })
-      .attr("cy", function(d) { return height; })
-      .attr("r", r[0])
-      .attr("stroke", "white")
-      .attr("fill", fill[0]);
+    .enter()
+      .append("circle")
+        .attr("cx", function(d) { return x(d.time); })
+        .attr("cy", height )
+        .attr("r", r[0])
+        .attr("stroke", "white")
+        .attr("fill", color);
+
+    svg.selectAll(".events")
+    .data(data)
+    .enter()
+      .append("line")
+        .attr("x1", function(d) { return x(d.time); })
+        .attr("y1", height - h / 2)
+        .attr("x2", function(d) { return x(d.time); })
+        .attr("y2", height + h / 2)
+        .attr("stroke", color);
+
     svg.selectAll("circle")
       .on("mouseover", function(d) {
         var offset_y = -40;
         this.setAttribute("r", r[1]);
-        this.setAttribute("fill", fill[1]);
         var msg = d.event + " (" + 
                   getHour(x.invert(d3.mouse(this)[0])) + ")";
         tooltip.html(msg)
